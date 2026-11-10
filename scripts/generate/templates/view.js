@@ -1,5 +1,4 @@
 export default (fileName, stylePathName) => `import React from 'react';
-import classNames from 'classnames';
 
 import classNames from '../../classNames';
 import styles from './${stylePathName}';

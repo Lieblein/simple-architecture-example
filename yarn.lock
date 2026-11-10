@@ -597,13 +597,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4":
-  version: 4.17.27
-  resolution: "@types/lodash@npm:4.17.27"
-  checksum: 327dec807c5861ee3b9a6c97e722d0f1dfd3d8f3983a2ba712a0c18b30b1115bbd47f05c0632638de6033ed9816f521d233ea772a157616bdb11027bad967c28
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:22":
   version: 22.20.5
   resolution: "@types/node@npm:22.20.5"
@@ -895,13 +888,6 @@ __metadata:
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
   checksum: 10/b63cb1f73d171d140a2ed8154ee6566c8ab775d3196b0e03a2a94b5f6a0ce7777ee5685ca56849403c8d17bd457a6540672f9a60696a6137c7a409097495b82c
-  languageName: node
-  linkType: hard
-
-"classnames@npm:^2.5.1":
-  version: 2.5.1
-  resolution: "classnames@npm:2.5.1"
-  checksum: fe96d20c8eab94d83bffc93106e1f7f5f926fb036d524c7f71f77f3b47a85f78dcc535c0ab5fa12c88fa3a641a3be5b4ad77b8f6ec64f9b830f86821ec4b2381
   languageName: node
   linkType: hard
 
@@ -1675,10 +1661,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.18.1":
-  version: 4.18.1
-  resolution: "lodash@npm:4.18.1"
-  checksum: 320def45917c82978a57fc7451c3f6c48ecdebe5df264b2f9023797573090e76051c7a3e5152fc0a1e4f070ec99d58ac80cd91af4c6e948cc4c30d66363aec48
+"lodash@npm:4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
   languageName: node
   linkType: hard
 
@@ -2039,16 +2025,14 @@ __metadata:
   resolution: "simple-architecture-example@workspace:."
   dependencies:
     "@eslint/js": "npm:^10.0.1"
-    "@types/lodash": "npm:^4"
     "@types/node": "npm:22"
     "@types/react": "npm:19"
     "@types/react-dom": "npm:19"
     "@vitejs/plugin-react": "npm:^6.1.2"
-    classnames: "npm:^2.5.1"
     eslint: "npm:^10.14.0"
     eslint-plugin-react-hooks: "npm:^7.1.1"
     lefthook: "npm:^2.2.2"
-    lodash: "npm:^4.18.1"
+    lodash: "npm:4.17.21"
     react: "npm:^19.3.1"
     react-dom: "npm:^19.3.1"
     stylelint: "npm:^18.0.0"

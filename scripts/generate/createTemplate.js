@@ -2,8 +2,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import camelCase from 'lodash/camelCase.js';
 import kebabCase from 'lodash/kebabCase.js';
 
@@ -11,6 +9,9 @@ import generateView from './templates/view.js';
 import generateTypes from './templates/types.js';
 import generateViewWithPresenter from './templates/viewWithPresenter.js';
 import generatePresenter from './templates/presenter.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default async(type, componentName) => {
     const name = camelCase(componentName);

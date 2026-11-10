@@ -1,6 +1,8 @@
 :root {
   --color-primary: #b79cff;
+  --color-primary-light: #f6f0ff;
   --color-text: #333;
+  --border-radius: 20px;
 }
 
 body {
@@ -21,4 +23,25 @@ body {
 ::after,
 ::before {
     box-sizing: border-box;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 500;
 }
