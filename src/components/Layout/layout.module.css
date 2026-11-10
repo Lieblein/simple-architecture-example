@@ -1,0 +1,14 @@
+.layout {
+    min-height: 100vh;
+    padding: 40px 80px;
+    background-image:
+        radial-gradient(60% 70% at 15% 20%, #fde0e7 0%, #fde0e700 60%),
+        radial-gradient(55% 65% at 85% 15%, #eef4ff  0%, #eef4ff00 60%),
+        radial-gradient(65% 75% at 75% 85%, #d6f5e6 0%, #d6f5e600 60%),
+        radial-gradient(70% 80% at 10% 90%, #f6f0ff 0%, #f6f0ff00 60%),
+        radial-gradient(50% 60% at 50% 50%, #fdf6f0  0%, #fdf6f000 60%),
+        linear-gradient(135deg, #fde0e7 0%, #eef4ff 25%, #d6f5e6 50%, #f6f0ff 75%, #fdf6f0 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,5 +1,16 @@
+:root {
+  --color-primary: #b79cff;
+  --color-text: #333;
+}
+
 body {
   margin: 0;
+  font-family: "Avenir Next", "Nunito Sans", "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
 }
 
 #root {

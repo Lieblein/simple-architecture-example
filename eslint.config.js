@@ -25,6 +25,7 @@ export default tseslint.config(
     },
     rules: {
       'semi': ['error', 'always'],
+      '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true }],
     },
   },
   {

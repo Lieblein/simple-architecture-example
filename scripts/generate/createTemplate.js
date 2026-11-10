@@ -20,7 +20,7 @@ export default async(type, componentName) => {
 
     await fs.mkdir(dirPath, { recursive: true });
 
-    const stylePathName = `${kebabCase(fileName)}.css`;
+    const stylePathName = `${kebabCase(fileName)}.module.css`;
 
     if (type === 'view') {
         await fs.writeFile(`${dirPath}/index.tsx`, generateView(fileName, stylePathName));
