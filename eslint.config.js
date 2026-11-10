@@ -9,6 +9,10 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      'no-restricted-imports': ['error', {
+        name: 'lodash',
+        message: 'Please use "import foo from \'lodash/foo\'" instead.'
+      }],
     },
   },
   ...tseslint.configs.recommended,
