@@ -9,7 +9,7 @@ export default function usePresenter() {
     const changeSearch = async(search: string) => {
         setSearch(search);
 
-        const shows = await sendRequest<IShow[]>('GET', '/api/search/shows', { q: search });
+        const shows = await sendRequest<IShow[]>('GET', `https://api.tvmaze.com?q=${search}`);
         setShows(shows);
     };
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
 
+import classNames from '../../classNames';
 import usePresenter from './usePresenter';
 import styles from './show-list-page.module.css';
 

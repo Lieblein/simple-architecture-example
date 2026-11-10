@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
 
+import classNames from '../../classNames';
 import styles from './layout.module.css';
 
 interface IProps {
