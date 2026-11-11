@@ -1,6 +1,4 @@
-export default (fileName, stylePathName) => `import React from 'react';
-
-import classNames from '../../classNames';
+export default (fileName, stylePathName) => `import classNames from '../../classNames';
 import { type IProps } from './types';
 import usePresenter from './usePresenter';
 import styles from './${stylePathName}';
