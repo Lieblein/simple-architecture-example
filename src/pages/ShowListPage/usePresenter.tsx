@@ -11,7 +11,7 @@ export default function usePresenter() {
 
         const response = await sendRequest<Array<{ score: number; show: IShow; }>>(
             'GET',
-            `https://api.tvmaze.com/search/shows?q=${search}`,
+            `/api/search/shows?q=${search}`,
         );
         const shows = response.map(({ show }) => show);
         setShows(shows);
@@ -20,7 +20,7 @@ export default function usePresenter() {
     // TODO: убрать, тут только для теста
     useEffect(
         () => {
-            changeSearch('test');
+            changeSearch('');
         },
         [],
     );

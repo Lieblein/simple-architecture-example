@@ -1,6 +1,0 @@
-.pre-commit:
-  commands:
-    lint:
-      run: yarn lint
-    stylelint:
-      run: yarn stylelint
