@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    position: relative;
+    max-height: calc(100vh - 350px);
     overflow: hidden;
     box-shadow: 0 2px 8px var(--box-shadow-1);
+    background-color: var(--color-primary-light);
     transition: box-shadow 0.3s ease;
 
     &:hover {
@@ -13,10 +14,7 @@
 }
 
 .header {
-    height: 72px;
     padding: 32px 40px 0;
-    position: relative;
-    z-index: 3;
 }
 
 .name {
@@ -27,10 +25,10 @@
 }
 
 .image-container {
-    flex-grow: 1;
-    min-height: 400px;
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
-    background-color: var(--color-primary-light);
+    position: relative;
 }
 
 .image {
@@ -49,20 +47,17 @@
 .overlay {
   position: absolute;
   z-index: 2;
-  inset: 0;
+  inset: -1px;
   background: linear-gradient(
     to bottom,
-    var(--color-primary-light) 15%,
+    var(--color-primary-light) 5%,
     transparent 50%,
-    var(--color-primary-light) 80%
+    var(--color-primary-light) 95%
   );
 }
 
 .footer {
-    height: 110px;
     padding: 0 40px 32px;
-    position: relative;
-    z-index: 3;
     display: flex;
     gap: 6px 12px;
     align-items: flex-end;

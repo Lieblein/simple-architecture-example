@@ -1,5 +1,6 @@
 .list {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
@@ -9,7 +10,7 @@
     border-radius: var(--border-radius-l);
     padding: 8px 16px;
     border: 2px solid var(--color-secondary);
-    transition: border-color .2s, background-color .2s, color .2s;
+    transition: border-color .2s, background-color .2s, color .2s, opacity .2s;
 
     &:hover {
         border-color: var(--color-primary);
@@ -22,8 +23,6 @@
     }
 
     &.selected:hover {
-        border-color: var(--color-primary);
-        background-color: var(--color-background);
-        color: var(--color-text);
+        opacity: .7;
     }
 }

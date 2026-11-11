@@ -32,14 +32,16 @@ export default function ShowCard(props: Readonly<IProps>) {
             <div className={ styles['image-container'] }>
                 {
                     image &&
-                    <img
-                        className={ styles.image }
-                        src={ image.original }
-                        alt={ name }
-                    />
+                    <>
+                        <img
+                            className={ styles.image }
+                            src={ image.original }
+                            alt={ name }
+                        />
+                        <div className={ styles.overlay } />
+                    </>
                 }
             </div>
-            <div className={ styles.overlay } />
             <div className={ styles.footer }>
                 {
                     genres.map((genre) => (
