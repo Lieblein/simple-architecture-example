@@ -1,8 +1,32 @@
 .card {
-    overflow: hidden;
     position: relative;
-    max-width: 350px;
-    border: 1px solid var(--color-primary-light);
+    overflow: hidden;
+    box-shadow: 0 2px 8px #00000010;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px #00000040;
+}
+
+.header {
+    height: 72px;
+    padding: 32px 40px 0;
+    position: relative;
+    z-index: 3;
+}
+
+.name {
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.image-container {
+    height: 400px;
+    width: 100%;
+    background-color: var(--color-primary-light);
 }
 
 .image {
@@ -10,36 +34,41 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    filter: saturate(0.6) contrast(0.82) brightness(1.15) sepia(0.18) blur(0.3px);
+    transition: filter .2s;
+  
+    .card:hover & {
+        filter: none;
+    }
 }
 
 .overlay {
   position: absolute;
+  z-index: 2;
   inset: 0;
   background: linear-gradient(
-    to top,
-    var(--color-primary-light) 20%,
-    transparent 110%
+    to bottom,
+    var(--color-primary-light) 15%,
+    transparent 50%,
+    var(--color-primary-light) 80%
   );
-  transition: background .2s;
-  
-  .card:hover & {
-    background: linear-gradient(
-        to top,
-        var(--color-primary-light) 20%,
-        transparent 80%
-    );
-  }
 }
 
-.data {
-    position: absolute;
-    bottom: 0;
-    padding: 0 60px 32px;
-}
-
-.header {
+.footer {
+    height: 110px;
+    padding: 0 40px 32px;
+    position: relative;
+    z-index: 3;
     display: flex;
+    gap: 6px 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
 }
 
-.name {
+.genre {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    padding: 1px 7px;
+    border: 1px solid var(--color-secondary);
+    font-size: 14px;
 }

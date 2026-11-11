@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export default function useBorderRadius(id: number, min: number = 20, max: number = 160) {
+export default function useBorderRadius(id: number, min: number = 20, max: number = 100) {
     return useMemo(
         () => {
             // FNV-1a или простая смесь битов

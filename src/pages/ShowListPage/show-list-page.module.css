@@ -1,11 +1,5 @@
 .show-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 32px;
-}
-
-.show-item {
-    width: calc((100% - 64px) / 3);
-    display: flex;
-    justify-content: center;
 }

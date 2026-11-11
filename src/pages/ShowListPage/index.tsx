@@ -1,6 +1,3 @@
-import React from 'react';
-
-import classNames from '../../classNames';
 import usePresenter from './usePresenter';
 import ShowCard from './components/ShowCard';
 import styles from './show-list-page.module.css';
@@ -17,7 +14,7 @@ export default function ShowListPage() {
             <ul className={ styles['show-list'] }>
                 {
                     shows.map((show) => (
-                        <li className={ styles['show-item'] }>
+                        <li>
                             <ShowCard show={ show } />
                         </li>
                     ))
