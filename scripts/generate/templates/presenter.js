@@ -1,4 +1,4 @@
-export default () => `import React from 'react';
+export default () => `import {} from 'react';
 
 import { type IProps } from './types';
 

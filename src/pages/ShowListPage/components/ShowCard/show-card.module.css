@@ -1,12 +1,15 @@
 .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 8px #00000010;
+    box-shadow: 0 2px 8px var(--box-shadow-1);
     transition: box-shadow 0.3s ease;
-}
 
-.card:hover {
-    box-shadow: 0 8px 24px #00000040;
+    &:hover {
+        box-shadow: 0 8px 24px var(--box-shadow-2);
+    }
 }
 
 .header {
@@ -24,7 +27,8 @@
 }
 
 .image-container {
-    height: 400px;
+    flex-grow: 1;
+    min-height: 400px;
     width: 100%;
     background-color: var(--color-primary-light);
 }
@@ -67,7 +71,7 @@
 
 .genre {
     background-color: var(--color-background);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-l);
     padding: 1px 7px;
     border: 1px solid var(--color-secondary);
     font-size: 14px;

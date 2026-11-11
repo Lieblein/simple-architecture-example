@@ -9,9 +9,7 @@ export default defineConfig({
     port: 5000,
     proxy: {
       '/api/search/shows': {
-        target: USE_MOCK
-          ? 'http://localhost:3001'
-          : 'https://api.tvmaze.com',
+        target: 'http://localhost:3001',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

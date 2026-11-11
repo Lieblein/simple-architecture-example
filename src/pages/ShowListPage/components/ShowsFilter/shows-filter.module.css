@@ -1,0 +1,9 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: var(--border-radius-l);
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--color-secondary);
+    padding: 20px;
+}

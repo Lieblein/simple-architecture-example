@@ -1,0 +1,29 @@
+.list {
+    display: flex;
+    gap: 8px;
+}
+
+.chip {
+    cursor: pointer;
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-l);
+    padding: 8px 16px;
+    border: 2px solid var(--color-secondary);
+    transition: border-color .2s, background-color .2s, color .2s;
+
+    &:hover {
+        border-color: var(--color-primary);
+    }
+
+    &.selected {
+        border-color: var(--color-primary);
+        background-color: var(--color-primary);
+        color: var(--color-text-primary);
+    }
+
+    &.selected:hover {
+        border-color: var(--color-primary);
+        background-color: var(--color-background);
+        color: var(--color-text);
+    }
+}

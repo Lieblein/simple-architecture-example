@@ -14,10 +14,11 @@ export default function usePresenter() {
 
     const changeSearch = async(search: string) => {
         setSearch(search);
+        setActivePage(1);
 
         const response = await sendRequest<Array<{ score: number; show: IShow; }>>(
             'GET',
-            `/api/search/shows?q=${search}`,
+            `https://api.tvmaze.com/search/shows?q=${search}`, // `/api/search/shows?q=${search}`,
         );
         const shows = response.map(({ show }) => show);
         setShows(shows);
@@ -26,24 +27,41 @@ export default function usePresenter() {
     // TODO: убрать, тут только для теста
     useEffect(
         () => {
-            changeSearch('');
+            changeSearch('of');
         },
         [],
     );
 
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const changeSelectedGenres = (genres: string[]) => {
+        setSelectedGenres(genres);
+        setActivePage(1);
+    };
+
+    const filteredShows = useMemo(
+        () => shows.filter(({ genres }) =>
+            selectedGenres.length === 0 ||
+            selectedGenres.some((selectedGenre) => genres.includes(selectedGenre)),
+        ),
+        [selectedGenres, shows],
+    );
+
     const [activePage, setActivePage] = useState(1);
     const pageShows = useMemo(
-        () => getListForPage(shows, activePage, ITEMS_PER_PAGE),
-        [shows, activePage],
+        () => getListForPage(filteredShows, activePage, ITEMS_PER_PAGE),
+        [filteredShows, activePage],
     );
 
     return {
         search,
         changeSearch,
+        selectedGenres,
+        changeSelectedGenres,
         activePage,
-        pagesCount: getPagesCount(shows, ITEMS_PER_PAGE),
+        pagesCount: getPagesCount(filteredShows, ITEMS_PER_PAGE),
         changeActivePage: setActivePage,
         shows,
+        filteredShows,
         pageShows,
     };
 }
