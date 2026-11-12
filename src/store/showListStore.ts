@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { type IShow } from '../types/api/show';
 import { getListForPage, getPagesCount } from '../utils/pagination';
 import { sendRequest } from '../utils/request';
+import { useNotificationStore } from './notificationStore';
 
 const ITEMS_PER_PAGE = 3;
 
@@ -60,8 +61,7 @@ export const useShowListStore = create<ShowListStore>((set) => ({
             if (error instanceof Error && error.name === 'AbortError') {
                 return;
             }
-            console.log(error);
-            // TODO: нотификация с ошибкой для пользователя
+            useNotificationStore.getState().addNotification('Ошибка загрузки данных', 'error');
         } finally {
             set({ isLoading: false });
         }

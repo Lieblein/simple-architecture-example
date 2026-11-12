@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from '../../classNames';
+import Notifications from './components/Notifications';
 import styles from './layout.module.css';
 
 interface IProps {
@@ -14,6 +15,7 @@ export default function Layout(props: Readonly<IProps>) {
     return (
         <div className={ classNames(className, styles.layout) }>
             { children }
+            <Notifications />
         </div>
     );
 }
