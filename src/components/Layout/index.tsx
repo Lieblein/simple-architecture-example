@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classNames from '../../classNames';
+import classNames from '../../utils/classNames';
 import Notifications from './components/Notifications';
 import styles from './layout.module.css';
 

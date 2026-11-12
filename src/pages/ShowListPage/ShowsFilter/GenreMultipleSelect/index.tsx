@@ -1,4 +1,4 @@
-import classNames from '../../../../../../classNames';
+import classNames from '../../../../utils/classNames';
 import { type IProps } from './types';
 import usePresenter from './usePresenter';
 import styles from './genre-multiple-select.module.css';

@@ -1,10 +1,10 @@
 import { useShallow } from 'zustand/shallow';
 import { useShowListStore, selectPageShows, selectPagesCount } from '../../store/showListStore';
-import ShowCard from './components/ShowCard';
-import Pagination from './components/Pagination';
-import ShowsFilter from './components/ShowsFilter';
-import ShowCardSkeleton from './components/ShowCardSkeleton';
+import Pagination from '../../components/Pagination';
 import LoaderOverlay from '../../components/LoaderOverlay';
+import ShowCard from './ShowCard';
+import ShowsFilter from './ShowsFilter';
+import ShowCardSkeleton from './ShowCardSkeleton';
 import styles from './show-list-page.module.css';
 
 export default function ShowListPage() {

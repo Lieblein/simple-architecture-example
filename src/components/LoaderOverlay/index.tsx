@@ -1,4 +1,4 @@
-import classNames from '../../classNames';
+import classNames from '../../utils/classNames';
 import useRandomBorderRadius from '../../hooks/useRandomBorderRadius';
 import styles from './loader-overlay.module.css';
 

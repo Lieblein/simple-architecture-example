@@ -1,4 +1,4 @@
-import classNames from '../../../../classNames';
+import classNames from '../../../../utils/classNames';
 import { useNotificationStore } from '../../../../store/notificationStore';
 import Notification from '../Notification';
 import styles from './notifications.module.css';

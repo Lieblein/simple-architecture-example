@@ -1,5 +1,5 @@
-import classNames from '../../../../classNames';
-import useRandomBorderRadius from '../../../../hooks/useRandomBorderRadius';
+import classNames from '../../../utils/classNames';
+import useRandomBorderRadius from '../../../hooks/useRandomBorderRadius';
 import styles from './show-card-skeleton.module.css';
 
 interface IProps {
