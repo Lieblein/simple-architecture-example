@@ -1,5 +1,5 @@
-import classNames from '../../../../utils/classNames';
-import { INotification, useNotificationStore } from '../../../../store/notificationStore';
+import classNames from '@utils/classNames';
+import { INotification, useNotificationStore } from '@store/notificationStore';
 import styles from './notification.module.css';
 
 interface IProps {

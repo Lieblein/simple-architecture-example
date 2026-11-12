@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { type IShow } from '../types/api/show';
-import { getListForPage, getPagesCount } from '../utils/pagination';
-import { sendRequest } from '../utils/request';
+import { type IShow } from '@types/api/show';
+import { getListForPage, getPagesCount } from '@utils/pagination';
+import { sendRequest } from '@utils/request';
 import { useNotificationStore } from './notificationStore';
 
 const ITEMS_PER_PAGE = 3;

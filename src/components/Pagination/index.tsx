@@ -1,4 +1,4 @@
-import classNames from '../../utils/classNames';
+import classNames from '@utils/classNames';
 import { type IProps } from './types';
 import usePresenter from './usePresenter';
 import styles from './pagination.module.css';

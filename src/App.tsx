@@ -1,4 +1,4 @@
-import Layout from './components/Layout';
+import Layout from '@components/Layout';
 import ShowListPage from './pages/ShowListPage';
 
 export default function App() {

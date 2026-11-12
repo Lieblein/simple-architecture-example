@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/shallow';
-import { useShowListStore, selectPageShows, selectPagesCount } from '../../store/showListStore';
-import Pagination from '../../components/Pagination';
-import LoaderOverlay from '../../components/LoaderOverlay';
+import { useShowListStore, selectPageShows, selectPagesCount } from '@store/showListStore';
+import Pagination from '@components/Pagination';
+import LoaderOverlay from '@components/LoaderOverlay';
 import ShowCard from './ShowCard';
 import ShowsFilter from './ShowsFilter';
 import ShowCardSkeleton from './ShowCardSkeleton';

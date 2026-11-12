@@ -1,5 +1,5 @@
-import classNames from '../../utils/classNames';
-import useRandomBorderRadius from '../../hooks/useRandomBorderRadius';
+import classNames from '@utils/classNames';
+import useRandomBorderRadius from '@hooks/useRandomBorderRadius';
 import styles from './loader-overlay.module.css';
 
 const MIN = 4;

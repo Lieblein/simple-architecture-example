@@ -1,8 +1,8 @@
 import { useShallow } from 'zustand/shallow';
-import classNames from '../../../utils/classNames';
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
-import { useShowListStore } from '../../../store/showListStore';
+import classNames from '@utils/classNames';
+import Button from '@components/Button';
+import Input from '@components/Input';
+import { useShowListStore } from '@store/showListStore';
 import GenreMultipleSelect from './GenreMultipleSelect';
 import styles from './shows-filter.module.css';
 

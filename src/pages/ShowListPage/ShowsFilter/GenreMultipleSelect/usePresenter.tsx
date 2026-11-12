@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useShowListStore } from '../../../../../../store/showListStore';
+import { useShowListStore } from '@store/showListStore';
 import { type IProps } from './types';
 
 export default function usePresenter(props: Readonly<IProps>) {
