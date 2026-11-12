@@ -5,6 +5,8 @@ import { sendRequest } from '../utils/request';
 
 const ITEMS_PER_PAGE = 3;
 
+let abortController: AbortController | null = null;
+
 interface IShowListState {
     search: string;
     shows: IShow[];
@@ -30,6 +32,9 @@ export const useShowListStore = create<ShowListStore>((set) => ({
     activePage: 1,
 
     changeSearch: async (search: string) => {
+        abortController?.abort();
+        abortController = new AbortController();
+
         set({
             search,
             activePage: 1,
@@ -37,19 +42,24 @@ export const useShowListStore = create<ShowListStore>((set) => ({
         });
 
         if (search.trim() === '') {
+            abortController = null;
             set({ shows: [], isLoading: false });
             return;
         }
 
         try {
-            // TODO: abort controller
+            // TODO: debounce
             const data = await sendRequest<Array<{ score: number; show: IShow }>>(
                 'GET',
                 `/api/search/shows?q=${search.trim()}`,
+                abortController.signal,
             );
             const shows = data.map(({ show }) => show);
             set({ shows });
         } catch (error) {
+            if (error instanceof Error && error.name === 'AbortError') {
+                return;
+            }
             console.log(error);
             // TODO: нотификация с ошибкой для пользователя
         } finally {
