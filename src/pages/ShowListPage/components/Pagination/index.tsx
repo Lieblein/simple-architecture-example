@@ -23,7 +23,7 @@ export default function Pagination(props: Readonly<IProps>) {
         <div className={ classNames(styles.pagination, className) }>
             <button
                 type='button'
-                className={ classNames(styles.button, styles['arrow-button']) }
+                className={ classNames(styles.button, styles.arrowButton) }
                 disabled={ !canGoPrev }
                 onClick={ () => onChangeActivePage(activePage - 1) }
                 title='Предыдущая страница'
@@ -59,7 +59,7 @@ export default function Pagination(props: Readonly<IProps>) {
                         <button
                             key={ page }
                             type='button'
-                            className={ classNames(styles.button, styles['page-button'], { [styles.active]: isActive }) }
+                            className={ classNames(styles.button, styles.pageButton, { [styles.active]: isActive }) }
                             onClick={ () => onChangeActivePage(page) }
                             disabled={ isActive }
                         >
@@ -71,7 +71,7 @@ export default function Pagination(props: Readonly<IProps>) {
 
             <button
                 type='button'
-                className={ classNames(styles.button, styles['arrow-button']) }
+                className={ classNames(styles.button, styles.arrowButton) }
                 disabled={ !canGoNext }
                 onClick={ () => onChangeActivePage(activePage + 1) }
                 title='Следующая страница'

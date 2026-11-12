@@ -28,7 +28,7 @@ export default function ShowsFilter(props: Readonly<IProps>) {
 
     return (
         <div className={ classNames(className, styles.filter) }>
-            <div className={ styles['first-line'] }>
+            <div className={ styles.firstLine }>
                 <Input
                     className={ styles.search }
                     name='search'

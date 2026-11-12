@@ -1,7 +1,7 @@
 import classNames from '../../../../classNames';
 import { type IShow } from '../../types';
+import useBorderRadius from '../../useBorderRadius';
 import styles from './show-card.module.css';
-import useBorderRadius from './useBorderRadius';
 
 interface IProps {
     className?: string;
@@ -29,7 +29,7 @@ export default function ShowCard(props: Readonly<IProps>) {
                     { name.toLowerCase() }
                 </h4>
             </div>
-            <div className={ styles['image-container'] }>
+            <div className={ styles.imageContainer }>
                 {
                     image &&
                     <>

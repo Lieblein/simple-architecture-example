@@ -28,7 +28,7 @@ export default function ShowListPage() {
                 onChangeSelectedGenres={ changeSelectedGenres }
                 resetFilter={ resetFilter }
             />
-            <ul className={ styles['show-list'] }>
+            <ul className={ styles.showList }>
                 {
                     pageShows.map((show) => (
                         <li key={ show.id }>
