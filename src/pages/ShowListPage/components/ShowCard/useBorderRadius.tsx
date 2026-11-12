@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export default function useBorderRadius(id: number, min: number = 20, max: number = 100) {
+export default function useBorderRadius(id: number, min: number, max: number) {
     return useMemo(
         () => {
             // FNV-1a или простая смесь битов
@@ -8,6 +8,7 @@ export default function useBorderRadius(id: number, min: number = 20, max: numbe
             h = (h ^ (h >>> 16)) >>> 0;
 
             const range = max - min;
+
             return [0, 1, 2, 3]
                 .map((i) => {
                     // сдвигаем биты, чтобы углы не коррелировали

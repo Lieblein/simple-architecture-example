@@ -1,0 +1,22 @@
+.button {
+    height: var(--control-height);
+    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border-radius: var(--border-radius-l);
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .7;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary-dark);
+        box-shadow: inset 0 0 4px 0 var(--color-primary-dark);
+    }
+}

@@ -6,10 +6,11 @@ import styles from './show-list-page.module.css';
 
 export default function ShowListPage() {
     const {
-        // search,
-        // changeSearch,
+        search,
+        changeSearch,
         selectedGenres,
         changeSelectedGenres,
+        resetFilter,
         shows,
         pageShows,
         activePage,
@@ -21,8 +22,11 @@ export default function ShowListPage() {
         <div className={ styles.page }>
             <ShowsFilter
                 shows={ shows }
+                search={ search }
+                onChangeSearch={ changeSearch }
                 selectedGenres={ selectedGenres }
                 onChangeSelectedGenres={ changeSelectedGenres }
+                resetFilter={ resetFilter }
             />
             <ul className={ styles['show-list'] }>
                 {

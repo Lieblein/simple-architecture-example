@@ -7,6 +7,10 @@ export default function GenreMultipleSelect(props: Readonly<IProps>) {
     const { className, value } = props;
     const { options, toggleOption } = usePresenter(props);
 
+    if (options.length === 0) {
+        return null;
+    }
+
     return (
         <div className={ classNames(className, styles.list) }>
             {
@@ -17,7 +21,7 @@ export default function GenreMultipleSelect(props: Readonly<IProps>) {
                         type='button'
                         onClick={ () => toggleOption(option) }
                     >
-                        { option }
+                        { option.toLocaleLowerCase() }
                     </button>
                 ))
             }

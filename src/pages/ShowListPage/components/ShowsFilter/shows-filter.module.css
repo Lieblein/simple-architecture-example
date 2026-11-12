@@ -7,3 +7,12 @@
     border: 1px solid var(--color-secondary);
     padding: 20px;
 }
+
+.first-line {
+    display: flex;
+    gap: 20px;
+}
+
+.search {
+    flex-grow: 1;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { type IShow } from './types';
 import { sendRequest } from './request';
 import {
@@ -16,26 +16,30 @@ export default function usePresenter() {
         setSearch(search);
         setActivePage(1);
 
+        if (search.trim() === '') {
+            setShows([]);
+            return;
+        }
+
         const response = await sendRequest<Array<{ score: number; show: IShow; }>>(
             'GET',
-            `https://api.tvmaze.com/search/shows?q=${search}`, // `/api/search/shows?q=${search}`,
+            `/api/search/shows?q=${search.trim()}`, // `https://api.tvmaze.com/search/shows?q=${search}`
         );
         const shows = response.map(({ show }) => show);
         setShows(shows);
     };
 
-    // TODO: убрать, тут только для теста
-    useEffect(
-        () => {
-            changeSearch('of');
-        },
-        [],
-    );
-
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const changeSelectedGenres = (genres: string[]) => {
         setSelectedGenres(genres);
         setActivePage(1);
+    };
+
+    const resetFilter = () => {
+        setSearch('');
+        setSelectedGenres([]);
+        setActivePage(1);
+        setShows([]);
     };
 
     const filteredShows = useMemo(
@@ -52,11 +56,13 @@ export default function usePresenter() {
         [filteredShows, activePage],
     );
 
+    // TODO: много пробрасываний пропсов через компоненты, нужен стейт менеджер
     return {
         search,
         changeSearch,
         selectedGenres,
         changeSelectedGenres,
+        resetFilter,
         activePage,
         pagesCount: getPagesCount(filteredShows, ITEMS_PER_PAGE),
         changeActivePage: setActivePage,

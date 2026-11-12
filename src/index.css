@@ -1,11 +1,13 @@
 :root {
   --color-primary: #8e72db;
   --color-primary-light: #f6f0ff;
+  --color-primary-dark: #663d9c;
   --color-secondary: #ececec;
   --color-secondary-dark: #c9c9c9;
   --color-background: #fff;
   --color-text: #333;
   --color-text-primary: #fff;
+  --control-height: 40px;
   --border-radius-l: 20px;
   --box-shadow-1: #00000010;
   --box-shadow-2: #00000040;

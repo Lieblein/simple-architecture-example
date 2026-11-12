@@ -17,7 +17,7 @@ export default function ShowCard(props: Readonly<IProps>) {
         genres,
     } = show;
 
-    const borderRadius = useBorderRadius(id);
+    const borderRadius = useBorderRadius(id, 20, 100);
 
     return (
         <div
@@ -26,7 +26,7 @@ export default function ShowCard(props: Readonly<IProps>) {
         >
             <div className={ styles.header }>
                 <h4 className={ styles.name }>
-                    { name }
+                    { name.toLowerCase() }
                 </h4>
             </div>
             <div className={ styles['image-container'] }>
@@ -49,7 +49,7 @@ export default function ShowCard(props: Readonly<IProps>) {
                             key={ genre }
                             className={ styles.genre }
                         >
-                            { genre }
+                            { genre.toLowerCase() }
                         </div>
                     ))
                 }
