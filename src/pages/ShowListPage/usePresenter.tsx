@@ -11,6 +11,7 @@ const ITEMS_PER_PAGE = 3;
 export default function usePresenter() {
     const [search, setSearch] = useState('');
     const [shows, setShows] = useState<IShow[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const changeSearch = async(search: string) => {
         setSearch(search);
@@ -21,12 +22,21 @@ export default function usePresenter() {
             return;
         }
 
-        const response = await sendRequest<Array<{ score: number; show: IShow; }>>(
-            'GET',
-            `/api/search/shows?q=${search.trim()}`, // `https://api.tvmaze.com/search/shows?q=${search}`
-        );
-        const shows = response.map(({ show }) => show);
-        setShows(shows);
+        try {
+            setIsLoading(true);
+            // TODO: abort controller
+            const response = await sendRequest<Array<{ score: number; show: IShow; }>>(
+                'GET',
+                `/api/search/shows?q=${search.trim()}`, // `https://api.tvmaze.com/search/shows?q=${search}`
+            );
+            const shows = response.map(({ show }) => show);
+            setShows(shows);
+        } catch (error) {
+            console.log(error);
+            // TODO: нотификация с ошибкой для пользователя
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -66,6 +76,7 @@ export default function usePresenter() {
         activePage,
         pagesCount: getPagesCount(filteredShows, ITEMS_PER_PAGE),
         changeActivePage: setActivePage,
+        isLoading,
         shows,
         filteredShows,
         pageShows,

@@ -27,24 +27,26 @@ export default function ShowsFilter(props: Readonly<IProps>) {
     } = props;
 
     return (
-        <div className={ classNames(className, styles.filter) }>
-            <div className={ styles.firstLine }>
-                <Input
-                    className={ styles.search }
-                    name='search'
-                    value={ search }
-                    onChange={ (event) => onChangeSearch(event.target.value) }
-                    placeholder='поиск...'
+        <div className={ classNames(className, styles.root) }>
+            <div className={ styles.filter }>
+                <div className={ styles.firstLine }>
+                    <Input
+                        className={ styles.search }
+                        name='search'
+                        value={ search }
+                        onChange={ (event) => onChangeSearch(event.target.value) }
+                        placeholder='поиск...'
+                    />
+                    <Button onClick={ resetFilter }>
+                        очистить фильтр
+                    </Button>
+                </div>
+                <GenreMultipleSelect
+                    shows={ shows }
+                    value={ selectedGenres }
+                    onChange={ onChangeSelectedGenres }
                 />
-                <Button onClick={ resetFilter }>
-                    очистить фильтр
-                </Button>
             </div>
-            <GenreMultipleSelect
-                shows={ shows }
-                value={ selectedGenres }
-                onChange={ onChangeSelectedGenres }
-            />
         </div>
     );
 }

@@ -1,3 +1,7 @@
+.root {
+    min-height: 137px;
+}
+
 .filter {
     display: flex;
     flex-direction: column;

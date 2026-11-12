@@ -1,0 +1,48 @@
+.overlay {
+    z-index: 1000;
+    position: absolute;
+    inset: 0;
+    background-color: #00000010;
+    border-radius: var(--border-radius-l);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list {
+    display: flex;
+    gap: 16px;
+}
+
+.item {
+    height: 60px;
+    width: 40px;
+    transition: border-radius .5s;
+    background-color: var(--color-primary-light);
+    animation: scale .9s ease-in-out infinite;
+    transform-origin: center center;
+    animation-delay: .3s;
+
+    &:first-child {
+        animation-delay: 0s;
+    }
+
+    &:last-child {
+        animation-delay: .6s;
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+

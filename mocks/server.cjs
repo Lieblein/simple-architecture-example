@@ -3,6 +3,9 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use((req, res, next) => {
+    setTimeout(next, 1000);
+});
 
 const shows = [
     {
