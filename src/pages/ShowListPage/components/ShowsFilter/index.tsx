@@ -1,30 +1,37 @@
+import { useShallow } from 'zustand/shallow';
 import classNames from '../../../../classNames';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
-import { type IShow } from '../../types';
+import { useShowListStore } from '../../../../store/showListStore';
 import GenreMultipleSelect from './components/GenreMultipleSelect';
 import styles from './shows-filter.module.css';
 
 interface IProps {
     className?: string;
-    shows: IShow[];
-    search: string;
-    onChangeSearch: (search: string) => void;
-    selectedGenres: string[];
-    onChangeSelectedGenres: (selectedGenres: string[]) => void;
-    resetFilter: () => void;
 }
 
-export default function ShowsFilter(props: Readonly<IProps>) {
+export default function ShowsFilter({ className }: IProps) {
     const {
-        className,
-        shows,
         search,
-        onChangeSearch,
+        changeSearch,
         selectedGenres,
-        onChangeSelectedGenres,
+        changeSelectedGenres,
         resetFilter,
-    } = props;
+    } = useShowListStore(
+        useShallow(({
+            search,
+            changeSearch,
+            selectedGenres,
+            changeSelectedGenres,
+            resetFilter,
+        }) => ({
+            search,
+            changeSearch,
+            selectedGenres,
+            changeSelectedGenres,
+            resetFilter,
+        })),
+    );
 
     return (
         <div className={ classNames(className, styles.root) }>
@@ -34,7 +41,7 @@ export default function ShowsFilter(props: Readonly<IProps>) {
                         className={ styles.search }
                         name='search'
                         value={ search }
-                        onChange={ (event) => onChangeSearch(event.target.value) }
+                        onChange={ (event) => changeSearch(event.target.value) }
                         placeholder='поиск...'
                     />
                     <Button onClick={ resetFilter }>
@@ -42,9 +49,8 @@ export default function ShowsFilter(props: Readonly<IProps>) {
                     </Button>
                 </div>
                 <GenreMultipleSelect
-                    shows={ shows }
                     value={ selectedGenres }
-                    onChange={ onChangeSelectedGenres }
+                    onChange={ changeSelectedGenres }
                 />
             </div>
         </div>

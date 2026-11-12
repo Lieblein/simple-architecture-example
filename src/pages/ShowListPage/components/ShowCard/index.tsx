@@ -1,5 +1,5 @@
 import classNames from '../../../../classNames';
-import { type IShow } from '../../types';
+import { type IShow } from '../../../../types/api';
 import useBorderRadius from '../../useBorderRadius';
 import styles from './show-card.module.css';
 

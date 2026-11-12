@@ -1,4 +1,5 @@
-import usePresenter from './usePresenter';
+import { useShallow } from 'zustand/shallow';
+import { useShowListStore, selectPageShows, selectPagesCount } from '../../store/showListStore';
 import ShowCard from './components/ShowCard';
 import Pagination from './components/Pagination';
 import ShowsFilter from './components/ShowsFilter';
@@ -8,31 +9,28 @@ import styles from './show-list-page.module.css';
 
 export default function ShowListPage() {
     const {
-        search,
-        changeSearch,
-        selectedGenres,
-        changeSelectedGenres,
-        resetFilter,
-        isLoading,
-        shows,
-        pageShows,
         activePage,
-        pagesCount,
+        isLoading,
         changeActivePage,
-    } = usePresenter();
+    } = useShowListStore(
+        useShallow(({
+            activePage,
+            isLoading,
+            changeActivePage,
+        }) => ({
+            activePage,
+            isLoading,
+            changeActivePage,
+        })),
+    );
+    const pageShows = useShowListStore(useShallow(selectPageShows));
+    const pagesCount = useShowListStore(useShallow(selectPagesCount));
 
     return (
         <div className={ styles.page }>
-            <ShowsFilter
-                shows={ shows }
-                search={ search }
-                onChangeSearch={ changeSearch }
-                selectedGenres={ selectedGenres }
-                onChangeSelectedGenres={ changeSelectedGenres }
-                resetFilter={ resetFilter }
-            />
+            <ShowsFilter />
             {
-                shows.length > 0 &&
+                pageShows.length > 0 &&
                 <div className={ styles.body }>
                     <ul className={ styles.showList }>
                         {
@@ -50,7 +48,7 @@ export default function ShowListPage() {
                 </div>
             }
             {
-                shows.length === 0 &&
+                pageShows.length === 0 &&
                 isLoading &&
                 <div className={ styles.body }>
                     <ul className={ styles.showList }>

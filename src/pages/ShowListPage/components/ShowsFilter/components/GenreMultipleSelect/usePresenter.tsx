@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
-
+import { useShowListStore } from '../../../../../../store/showListStore';
 import { type IProps } from './types';
 
 export default function usePresenter(props: Readonly<IProps>) {
-    const { shows, value, onChange } = props;
+    const { value, onChange } = props;
+    const shows = useShowListStore(({ shows }) => shows);
 
     const options = useMemo(
         () => {
