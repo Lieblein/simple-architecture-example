@@ -9,4 +9,5 @@
 | `yarn build` | сборка продакшн версии приложения, формирует папку `dist` |
 | `yarn lint` | проверка style guide для ts/tsx |
 | `yarn stylelint` | проверка style guide для стилей |
+| `yarn mock` | запуск mock-сервера |
 | `yarn generate` | создание компонентов по шаблону |
