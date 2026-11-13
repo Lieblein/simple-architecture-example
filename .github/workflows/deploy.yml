@@ -25,6 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # активируем Corepack, чтобы Yarn 4 вступил в силу
+      - name: Enable Corepack
+        run: corepack enable
+
       # 1. Установка Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
