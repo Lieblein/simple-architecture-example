@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { type IShow } from '@types/api/show';
+import { type IShow } from '@api/show';
 import { getListForPage, getPagesCount } from '@utils/pagination';
 import { sendRequest } from '@utils/request';
 import { useNotificationStore } from './notificationStore';
