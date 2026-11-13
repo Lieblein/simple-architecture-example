@@ -1,5 +1,7 @@
 # simple architecture example
 
+[DEMO](https://Lieblein.github.io/simple-architecture-example/)
+
 ## yarn scripts
 
 | script | описание |
