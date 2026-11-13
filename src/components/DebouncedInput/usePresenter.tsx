@@ -9,6 +9,14 @@ export default function usePresenter<Name extends string>(props: Readonly<IProps
     } = props;
 
     const [value, setValue] = useState(props.value);
+    useEffect(
+        () => {
+            if (props.value !== value) {
+                setValue(props.value);
+            }
+        },
+        [props.value]
+    );
 
     const change = (value: string) => {
         setValue(value);
