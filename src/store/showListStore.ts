@@ -49,10 +49,9 @@ export const useShowListStore = create<ShowListStore>((set) => ({
         }
 
         try {
-            // TODO: debounce
             const data = await sendRequest<Array<{ score: number; show: IShow }>>(
                 'GET',
-                `https://api.tvmaze.com/search/shows?q=${search.trim()}`, // `/api/search/shows?q=${search.trim()}`,
+                `/api/search/shows?q=${search.trim()}`, // `https://api.tvmaze.com/search/shows?q=${search.trim()}`,
                 abortController.signal,
             );
             const shows = data.map(({ show }) => show);

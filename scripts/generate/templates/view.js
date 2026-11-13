@@ -1,4 +1,4 @@
-export default (fileName, stylePathName) => `import classNames from '../../classNames';
+export default (fileName, stylePathName) => `import classNames from '@utils/classNames';
 import styles from './${stylePathName}';
 
 interface IProps {

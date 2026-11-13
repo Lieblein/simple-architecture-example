@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/shallow';
 import classNames from '@utils/classNames';
 import Button from '@components/Button';
-import Input from '@components/Input';
+import DebouncedInput from '@components/DebouncedInput';
 import { useShowListStore } from '@store/showListStore';
 import GenreMultipleSelect from './GenreMultipleSelect';
 import styles from './shows-filter.module.css';
@@ -37,11 +37,12 @@ export default function ShowsFilter({ className }: IProps) {
         <div className={ classNames(className, styles.root) }>
             <div className={ styles.filter }>
                 <div className={ styles.firstLine }>
-                    <Input
+                    <DebouncedInput
                         className={ styles.search }
                         name='search'
                         value={ search }
-                        onChange={ (event) => changeSearch(event.target.value) }
+                        onChange={ changeSearch }
+                        debounceTimeout={ 200 }
                         placeholder='поиск...'
                     />
                     <Button onClick={ resetFilter }>
