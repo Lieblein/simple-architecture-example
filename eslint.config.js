@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', '.yarn', '.pnp.cjs', '.pnp.loader.mjs', 'yarn.lock'] },
+  { ignores: ['dist', 'node_modules', '.yarn', 'yarn.lock'] },
   {
     extends: [js.configs.recommended],
     plugins: { 'react-hooks': reactHooks },
@@ -26,11 +26,6 @@ export default tseslint.config(
     rules: {
       'semi': ['error', 'always'],
       '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true }],
-    },
-  },
-  {
-    files: ['**/*.tsx'],
-    rules: {
       'max-lines': ['error', { max: 120, skipBlankLines: true }],
     },
   },

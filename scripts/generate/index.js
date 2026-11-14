@@ -1,6 +1,6 @@
 import createTemplate from './createTemplate.js';
 
-const [,, type, componentName] = process.argv;
+const [,, type, componentName, directory = 'components'] = process.argv;
 
 const validTypes = ['view', 'presenter'];
 if (!type || !validTypes.includes(type)) {
@@ -12,4 +12,4 @@ if (!componentName) {
     throw new Error('Укажите название компонента');
 }
 
-createTemplate(type, componentName);
+createTemplate(type, componentName, directory);

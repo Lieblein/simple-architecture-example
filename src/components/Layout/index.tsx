@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classNames from '@utils/classNames';
-import Notifications from './components/Notifications';
+import Notifications from './Notifications';
 import styles from './layout.module.css';
 
 interface IProps {

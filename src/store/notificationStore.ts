@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { enableMapSet } from 'immer';
 
-enableMapSet();
+const HIDE_TIMEOUT = 3000;
 
 export interface INotification {
     id: number;
@@ -48,7 +47,7 @@ export const useNotificationStore = create<NotificationStore>()(
                         state.notifications.delete(id);
                     });
                 },
-                3000,
+                HIDE_TIMEOUT,
             );
         },
 

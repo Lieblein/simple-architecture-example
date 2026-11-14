@@ -16,7 +16,7 @@ export default function Input<Name extends string>(props: Readonly<IInputProps<N
         ...rest
     } = props;
 
-    const change = (event:  React.ChangeEvent<HTMLInputElement>) => {
+    const change = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(event.target.value, props.name);
     };
 

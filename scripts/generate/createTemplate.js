@@ -13,11 +13,11 @@ import generatePresenter from './templates/presenter.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default async(type, componentName) => {
+export default async(type, componentName, directory) => {
     const name = camelCase(componentName);
     const fileName = name[0].toUpperCase() + name.slice(1);
 
-    const dirPath = path.resolve(__dirname, '..', '..', 'src', 'components', fileName);
+    const dirPath = path.resolve(__dirname, '..', '..', 'src', ...directory.split('/'), fileName);
 
     await fs.mkdir(dirPath, { recursive: true });
 
@@ -26,8 +26,9 @@ export default async(type, componentName) => {
     if (type === 'view') {
         await fs.writeFile(`${dirPath}/index.tsx`, generateView(fileName, stylePathName));
     } else {
-        await fs.writeFile(`${dirPath}/types.tsx`, generateTypes());
-        await fs.writeFile(`${dirPath}/usePresenter.tsx`, generatePresenter());
+        await fs.writeFile(`${dirPath}/types.ts`, generateTypes());
+        await fs.mkdir(`${dirPath}/logic`, { recursive: true });
+        await fs.writeFile(`${dirPath}/logic/usePresenter.tsx`, generatePresenter());
         await fs.writeFile(`${dirPath}/index.tsx`, generateViewWithPresenter(fileName, stylePathName));
     }
 
