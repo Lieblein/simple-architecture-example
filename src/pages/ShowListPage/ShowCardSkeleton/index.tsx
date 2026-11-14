@@ -1,5 +1,5 @@
 import classNames from '@utils/classNames';
-import useRandomBorderRadius from '@hooks/useRandomBorderRadius';
+import usePresenter from './logic/usePresenter';
 import styles from './show-card-skeleton.module.css';
 
 interface IProps {
@@ -8,8 +8,7 @@ interface IProps {
 
 export default function ShowCardSkeleton(props: Readonly<IProps>) {
     const { className } = props;
-
-    const borderRadius = useRandomBorderRadius(20, 100);
+    const { borderRadius } = usePresenter();
 
     return (
         <div

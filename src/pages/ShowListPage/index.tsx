@@ -1,10 +1,9 @@
-import { useShallow } from 'zustand/shallow';
-import { useShowListStore, selectPageShows, selectPagesCount } from '@store/showListStore';
 import Pagination from '@components/Pagination';
 import LoaderOverlay from '@components/LoaderOverlay';
 import ShowCard from './ShowCard';
 import ShowsFilter from './ShowsFilter';
 import ShowCardSkeleton from './ShowCardSkeleton';
+import usePresenter from './logic/usePresenter';
 import styles from './show-list-page.module.css';
 
 export default function ShowListPage() {
@@ -12,19 +11,9 @@ export default function ShowListPage() {
         activePage,
         isLoading,
         changeActivePage,
-    } = useShowListStore(
-        useShallow(({
-            activePage,
-            isLoading,
-            changeActivePage,
-        }) => ({
-            activePage,
-            isLoading,
-            changeActivePage,
-        })),
-    );
-    const pageShows = useShowListStore(useShallow(selectPageShows));
-    const pagesCount = useShowListStore(useShallow(selectPagesCount));
+        pageShows,
+        pagesCount,
+    } = usePresenter();
 
     return (
         <div className={ styles.page }>

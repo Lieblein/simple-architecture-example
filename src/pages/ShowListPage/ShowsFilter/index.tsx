@@ -1,8 +1,7 @@
-import { useShallow } from 'zustand/shallow';
 import classNames from '@utils/classNames';
 import Button from '@components/Button';
 import DebouncedInput from '@components/DebouncedInput';
-import { useShowListStore } from '@store/showListStore';
+import usePresenter from './logic/usePresenter';
 import GenreMultipleSelect from './GenreMultipleSelect';
 import styles from './shows-filter.module.css';
 
@@ -17,21 +16,7 @@ export default function ShowsFilter({ className }: IProps) {
         selectedGenres,
         changeSelectedGenres,
         resetFilter,
-    } = useShowListStore(
-        useShallow(({
-            search,
-            changeSearch,
-            selectedGenres,
-            changeSelectedGenres,
-            resetFilter,
-        }) => ({
-            search,
-            changeSearch,
-            selectedGenres,
-            changeSelectedGenres,
-            resetFilter,
-        })),
-    );
+    } = usePresenter();
 
     return (
         <div className={ classNames(className, styles.root) }>

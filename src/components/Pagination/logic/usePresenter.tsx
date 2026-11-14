@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { type IProps } from './types';
+import { type IProps } from '../types';
 
 function getPageRange(activePage: number, pagesCount: number): (number | '...')[] {
     if (pagesCount <= 7) {

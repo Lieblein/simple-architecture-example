@@ -25,7 +25,8 @@
       "@api/*": ["src/types/api/*"],
       "@hooks/*": ["src/hooks/*"],
       "@store/*": ["src/store/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@tasks/*": ["src/tasks/*"]
     }
   },
   "include": ["src"],

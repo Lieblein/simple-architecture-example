@@ -1,6 +1,6 @@
 import omit from 'lodash/omit';
 import Input from '@components/Input';
-import usePresenter from './usePresenter';
+import usePresenter from './logic/usePresenter';
 import { type IProps } from './types';
 
 export default function DebouncedInput<Name extends string>(props: Readonly<IProps<Name>>) {

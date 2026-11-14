@@ -1,6 +1,6 @@
 import classNames from '@utils/classNames';
 import { type IProps } from './types';
-import usePresenter from './usePresenter';
+import usePresenter from './logic/usePresenter';
 import styles from './pagination.module.css';
 
 export default function Pagination(props: Readonly<IProps>) {

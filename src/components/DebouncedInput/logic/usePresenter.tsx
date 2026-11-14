@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { type IProps } from './types';
+import { type IProps } from '../types';
 
 export default function usePresenter<Name extends string>(props: Readonly<IProps<Name>>) {
     const {

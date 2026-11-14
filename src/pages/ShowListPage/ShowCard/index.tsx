@@ -1,6 +1,6 @@
 import classNames from '@utils/classNames';
 import { type IShow } from '@api/show';
-import useBorderRadius from '../useBorderRadius';
+import usePresenter from './logic/usePresenter';
 import styles from './show-card.module.css';
 
 interface IProps {
@@ -11,13 +11,12 @@ interface IProps {
 export default function ShowCard(props: Readonly<IProps>) {
     const { className, show } = props;
     const {
-        id,
         name,
         image,
         genres,
     } = show;
 
-    const borderRadius = useBorderRadius(id, 20, 100);
+    const { borderRadius } = usePresenter(show);
 
     return (
         <div

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import random from 'lodash/random';
-import useBorderRadius from '../pages/ShowListPage/useBorderRadius';
+import { calculateBorderRadius } from '@utils/borderRadius';
+
+// TODO: найти этому файлу нормальное место
 
 const ID_MIN = 1;
 const ID_MAX = 10000;
@@ -23,5 +25,5 @@ export default function useRandomBorderRadius(min: number, max: number) {
         [],
     );
 
-    return useBorderRadius(id, min, max);
+    return calculateBorderRadius(id, min, max);
 }
