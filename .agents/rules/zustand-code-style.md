@@ -70,13 +70,16 @@ export default function usePresenter(props: Readonly<IProps>) {
     const {
         search,
         activePage,
+        resetFilter,
     } = useShowListStore(
         useShallow(({
             search,
             activePage,
+            resetFilter,
         }) => ({
             search,
             activePage,
+            resetFilter,
         })),
     );
 

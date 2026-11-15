@@ -1,15 +1,15 @@
 type RequestMethod = 'GET';
 
-export async function sendRequest<Response>(
+export default async function sendRequest<Response>(
     method: RequestMethod,
     url: string,
-    abortControllerSignal?: AbortSignal,
+    options: { abortControllerSignal?: AbortSignal; } = {},
 ): Promise<Response> {
     const response = await fetch(
         url,
         {
             method,
-            signal: abortControllerSignal,
+            signal: options?.abortControllerSignal,
         },
     );
 

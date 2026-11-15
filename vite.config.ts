@@ -11,6 +11,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@store': path.resolve(__dirname, './src/store'),
       '@components': path.resolve(__dirname, './src/components'),
+      '@tasks': path.resolve(__dirname, './src/tasks'),
     },
   },
   css: {
@@ -21,10 +22,9 @@ export default defineConfig({
   server: {
     port: 5000,
     proxy: {
-      '/api/search/shows': {
+      '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

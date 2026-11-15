@@ -3,32 +3,29 @@ import { useShowListStore } from '@store/showListStore';
 
 export default function usePresenter() {
     const {
-        search,
-        selectedGenres,
+        filter,
         changeSearch,
         changeSelectedGenres,
-        resetFilter,
+        reset,
     } = useShowListStore(
         useShallow(({
-            search,
-            selectedGenres,
+            filter,
             changeSearch,
             changeSelectedGenres,
-            resetFilter,
+            reset,
         }) => ({
-            search,
-            selectedGenres,
+            filter,
             changeSearch,
             changeSelectedGenres,
-            resetFilter,
+            reset,
         })),
     );
 
     return {
-        search,
-        selectedGenres,
+        search: filter.search,
+        selectedGenres: filter.selectedGenres,
         changeSearch,
         changeSelectedGenres,
-        resetFilter,
+        reset,
     };
 }

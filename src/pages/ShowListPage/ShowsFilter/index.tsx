@@ -15,7 +15,7 @@ export default function ShowsFilter({ className }: IProps) {
         changeSearch,
         selectedGenres,
         changeSelectedGenres,
-        resetFilter,
+        reset,
     } = usePresenter();
 
     return (
@@ -30,7 +30,7 @@ export default function ShowsFilter({ className }: IProps) {
                         debounceTimeout={ 200 }
                         placeholder='поиск...'
                     />
-                    <Button onClick={ resetFilter }>
+                    <Button onClick={ reset }>
                         очистить фильтр
                     </Button>
                 </div>

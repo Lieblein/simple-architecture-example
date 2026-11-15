@@ -1,0 +1,112 @@
+[
+  {
+    "show": {
+      "id": 1,
+      "name": "Game of Thrones",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/1/3600.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/3600.jpg"
+      },
+      "genres": ["Drama", "Adventure", "Fantasy"]
+    }
+  },
+  {
+    "show": {
+      "id": 2,
+      "name": "Breaking Bad",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/0/1.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/0/1.jpg"
+      },
+      "genres": ["Drama", "Crime", "Thriller"]
+    }
+  },
+  {
+    "show": {
+      "id": 3,
+      "name": "The Simpsons",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/31/78183.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/31/78183.jpg"
+      },
+      "genres": ["Comedy", "Family"]
+    }
+  },
+  {
+    "show": {
+      "id": 4,
+      "name": "Stranger Things",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/211/527851.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/211/527851.jpg"
+      },
+      "genres": ["Drama", "Science-Fiction", "Horror"]
+    }
+  },
+  {
+    "show": {
+      "id": 5,
+      "name": "The Office",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/46/116259.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/46/116259.jpg"
+      },
+      "genres": ["Comedy"]
+    }
+  },
+  {
+    "show": {
+      "id": 6,
+      "name": "The Mandalorian",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/280/700472.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/280/700472.jpg"
+      },
+      "genres": ["Action", "Adventure", "Science-Fiction"]
+    }
+  },
+  {
+    "show": {
+      "id": 7,
+      "name": "Friends",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/28/72309.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/28/72309.jpg"
+      },
+      "genres": ["Comedy", "Romance"]
+    }
+  },
+  {
+    "show": {
+      "id": 8,
+      "name": "The Witcher",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/280/677937.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/280/677937.jpg"
+      },
+      "genres": ["Drama", "Action", "Adventure", "Fantasy"]
+    }
+  },
+  {
+    "show": {
+      "id": 9,
+      "name": "Black Mirror",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/rypt7e/149182.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/rypt7e/149182.jpg"
+      },
+      "genres": ["Drama", "Science-Fiction", "Thriller"]
+    }
+  },
+  {
+    "show": {
+      "id": 10,
+      "name": "Sherlock",
+      "image": {
+        "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/121/304498.jpg",
+        "original": "https://static.tvmaze.com/uploads/images/original_untouched/121/304498.jpg"
+      },
+      "genres": ["Drama", "Crime", "Mystery"]
+    }
+  }
+]

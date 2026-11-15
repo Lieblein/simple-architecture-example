@@ -4,19 +4,15 @@ import { type IProps } from './types';
 
 export default function usePresenter(props: Readonly<IProps>) {
     const { value, onChange } = props;
-    const shows = useShowListStore(({ shows }) => shows);
+    const availableGenres = useShowListStore(({ availableGenres }) => availableGenres);
 
     const options = useMemo(
         () => {
-            const options = new Set(value);
-
-            shows.forEach(({ genres }) => {
-                genres.forEach((genre) => options.add(genre));
-            });
+            const options = new Set(value.concat(availableGenres));
 
             return Array.from(options).sort();
         },
-        [value, shows],
+        [value, availableGenres],
     );
 
     const toggleOption = (option: string) => {

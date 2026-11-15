@@ -1,3 +1,5 @@
+// TODO: найти этому файлу нормальное место. UI-логика - это же не таска?
+
 export default function classNames(...args: Array<undefined | string | Record<string, boolean>>) {
   return args
     .flatMap((item) => {

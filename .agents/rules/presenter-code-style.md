@@ -28,20 +28,23 @@ const shows = useShowListStore(({ shows }) => shows);
 const {
     search,
     activePage,
+    resetFilter,
 } = useShowListStore(
     useShallow(
         ({
             search,
             activePage,
+            resetFilter,
         }) => ({
             search,
             activePage,
+            resetFilter,
         }),
     ),
 );
 
 // Селекторы для вычисляемых данных
-const pageShows = useShowListStore(useShallow(selectPageShows));
+const pageShows = useShowListStore(selectPageShows);
 ```
 
 ## Обработка событий
@@ -54,10 +57,3 @@ const pageShows = useShowListStore(useShallow(selectPageShows));
 
 - Возвращаем объект с данными и обработчиками для View.
 - Даже если в объекте 1 свойство всё равно возвращаем объект. Делаем так для более простого расширения в будущем.
-
-
-## Что НЕ должен делать Presenter
-
-- **Бизнес-логика** (запросы к API, валидация с бизнес-правилами) — это Interactor/tasks
-- **UI-рендеринг** — это View
-- **Хранение состояния** — это Entity (Zustand store)

@@ -1,31 +1,31 @@
 import { useShallow } from 'zustand/shallow';
-import { useShowListStore, selectPageShows, selectPagesCount } from '@store/showListStore';
+import { useShowListStore } from '@store/showListStore';
 
 export default function usePresenter() {
     const {
-        activePage,
+        pagination,
         isLoading,
         changeActivePage,
+        shows,
     } = useShowListStore(
         useShallow(({
-            activePage,
+            pagination,
             isLoading,
             changeActivePage,
+            shows,
         }) => ({
-            activePage,
+            pagination,
             isLoading,
             changeActivePage,
+            shows,
         })),
     );
 
-    const pageShows = useShowListStore(useShallow(selectPageShows));
-    const pagesCount = useShowListStore(useShallow(selectPagesCount));
-
     return {
-        activePage,
+        activePage: pagination.activePage,
         isLoading,
         changeActivePage,
-        pageShows,
-        pagesCount,
+        pageShows: shows,
+        pagesCount: pagination.totalPages,
     };
 }

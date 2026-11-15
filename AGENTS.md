@@ -57,23 +57,24 @@ src/
 │
 │
 ├── tasks/                              # Interactor, бизнес-логика
+│   └── makeSomeAction.ts               # Пример task. Название - это всегда глагол
 │
 │
-├── hooks/               # Общие хуки
-├── utils/               # Общие утилиты
-└── types/               # Общие типы
+├── hooks/                              # Общие хуки (TODO: придумать нужное место)
+├── utils/                              # Общие утилиты (TODO: придумать нужное место)
+└── types/                              # Общие типы
 ```
 
 ## Команды
 
 | Команда | Описание |
 | ------- | -------- |
-| `yarn start` | Запуск dev-сервера |
+| `yarn start` | Запуск frontend dev-сервера |
 | `yarn build` | TypeScript-проверка + production-сборка |
 | `yarn lint` | ESLint для TS/TSX |
 | `yarn stylelint` | Stylelint для CSS |
 | `yarn generate` | Генерация компонента по шаблону |
-| `yarn mock` | Запуск mock-сервера |
+| `yarn server` | Запуск backend-сервера |
 
 ## Алгоритм создания нового компонента
 
@@ -105,10 +106,3 @@ TODO: написать про `components`, когда будут хорошие
 
 Пример удачной команды для создания уже существующего компонента ShowCard:
 `yarn generate view show-card pages/ShowListPage`.
-
-
-## Соглашения по коду
-
-- **classNames** утилита (`@utils/classNames`) для условных классов
-- **CSS Modules** для стилизации компонентов
-- **Immer** middleware для Zustand stores

@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "stylelint": "stylelint \"**/*.css\"",
     "generate": "node ./scripts/generate/index.js",
-    "mock": "node mocks/server.cjs"
+    "server": "node server/index.cjs"
   },
   "dependencies": {
     "immer": "^11.2.10",
