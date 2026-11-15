@@ -1,5 +1,7 @@
 import { useShallow } from 'zustand/shallow';
-import { useShowListStore } from '@store/showListStore';
+import { useEffect } from 'react';
+import useShowListStore from '@store/showListStore';
+import useFavoritesStore from '@store/favoritesStore';
 
 export default function usePresenter() {
     const {
@@ -21,11 +23,26 @@ export default function usePresenter() {
         })),
     );
 
+    const {
+        getFavorites,
+        favoriteShows,
+    } = useFavoritesStore(
+        useShallow(({
+            getFavorites,
+            favoriteShows,
+        }) => ({
+            getFavorites,
+            favoriteShows,
+        })),
+    );
+
+    useEffect(() => {  getFavorites(); }, []);
+
     return {
-        activePage: pagination.activePage,
+        pagination,
         isLoading,
         changeActivePage,
         pageShows: shows,
-        pagesCount: pagination.totalPages,
+        favoriteShows,
     };
 }

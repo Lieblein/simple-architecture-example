@@ -1,6 +1,6 @@
 import { type IShow } from '@api/show';
 import sendRequest from '@tasks/sendRequest';
-import { useNotificationStore } from '@store/notificationStore';
+import useNotificationStore from '@store/notificationStore';
 
 const ITEMS_PER_PAGE = 3;
 
@@ -54,7 +54,7 @@ export default async function searchShows(params: ISearchShowsParams) {
         const abortControllerSignal = updateAbortController();
         const data = await sendRequest<ISearchShowsResponse>(
             'GET',
-            `/api/search/shows?${queryParams.toString()}`,
+            `/api/search/show?${queryParams.toString()}`,
             { abortControllerSignal },
         );
 

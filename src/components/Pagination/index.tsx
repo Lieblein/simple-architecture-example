@@ -6,18 +6,19 @@ import styles from './pagination.module.css';
 export default function Pagination(props: Readonly<IProps>) {
     const {
         className,
-        activePage,
-        pagesCount,
+        pagination: { activePage, totalPages },
         onChangeActivePage,
     } = props;
 
-    if (pagesCount <= 1) {
+    if (totalPages <= 1) {
         return null;
     }
 
-    const { pageRange } = usePresenter(props);
-    const canGoPrev = activePage > 1;
-    const canGoNext = activePage < pagesCount;
+    const {
+        pageRange,
+        canGoNext,
+        canGoPrev,
+    } = usePresenter(props);
 
     return (
         <div className={ classNames(styles.pagination, className) }>

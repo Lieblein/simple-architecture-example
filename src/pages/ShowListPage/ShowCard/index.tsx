@@ -1,12 +1,8 @@
 import classNames from '@utils/classNames';
-import { type IShow } from '@api/show';
+import FavoriteToggleButton from './FavoriteToggleButton';
 import usePresenter from './logic/usePresenter';
 import styles from './show-card.module.css';
-
-interface IProps {
-    className?: string;
-    show: IShow;
-}
+import { type IProps } from './types';
 
 export default function ShowCard(props: Readonly<IProps>) {
     const { className, show } = props;
@@ -16,7 +12,9 @@ export default function ShowCard(props: Readonly<IProps>) {
         genres,
     } = show;
 
-    const { borderRadius } = usePresenter(show);
+    const {
+        borderRadius,
+    } = usePresenter(props);
 
     return (
         <div
@@ -27,6 +25,9 @@ export default function ShowCard(props: Readonly<IProps>) {
                 <h4 className={ styles.name }>
                     { name.toLowerCase() }
                 </h4>
+                <FavoriteToggleButton
+                    showId={ show.id }
+                />
             </div>
             <div className={ styles.imageContainer }>
                 {

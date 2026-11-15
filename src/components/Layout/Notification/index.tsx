@@ -1,5 +1,5 @@
 import classNames from '@utils/classNames';
-import { type INotification } from '@store/notificationStore';
+import { type INotification } from '@ui/notification';
 import usePresenter from './logic/usePresenter';
 import styles from './notification.module.css';
 

@@ -13,37 +13,58 @@ Presenter — это hook `usePresenter`, который готовит данн
 - Название файла: `usePresenter.tsx`.
 - Расположение: папка `logic/` рядом с View смотри **AGENTS.md**.
 - Экспорт: `export default function usePresenter`
-- Единственный аргумент: `props: Readonly<IProps>`
+- Единственный аргумент: `props: Readonly<IProps>`. Всегда передаём все props, даже если используем только часть. Так проще потом расширять логику.
 - IProps: импортируется из `./types`
 
 ## Получение данных из store
 
 Presenter получает данные из Zustand store. View не должен обращаться к store напрямую.
 
+Одно свойство деструктурируем store:
 ```tsx
-// Одно свойство
 const shows = useShowListStore(({ shows }) => shows);
+```
 
-// Несколько свойств — используем useShallow
+Для нескольких свойств **всегда** используем useShallow и деструктурируем store.
+Каждое свойство с новой строки.
+С обработчиками поступаем точно также, как и с данными:
+```tsx
 const {
     search,
-    activePage,
     resetFilter,
 } = useShowListStore(
     useShallow(
         ({
             search,
-            activePage,
             resetFilter,
         }) => ({
             search,
-            activePage,
+            resetFilter,
+        }),
+    ),
+);
+```
+
+В usePresenter обычно не более 1 использования одного стора. 
+
+Исключение - использование селекторов.
+Тогда можно несколько раз изпользовать один стор:
+```tsx
+const {
+    search,
+    resetFilter,
+} = useShowListStore(
+    useShallow(
+        ({
+            search,
+            resetFilter,
+        }) => ({
+            search,
             resetFilter,
         }),
     ),
 );
 
-// Селекторы для вычисляемых данных
 const pageShows = useShowListStore(selectPageShows);
 ```
 

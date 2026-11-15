@@ -1,4 +1,4 @@
-type RequestMethod = 'GET';
+type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
 
 export default async function sendRequest<Response>(
     method: RequestMethod,

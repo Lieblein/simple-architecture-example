@@ -7,14 +7,15 @@ app.use(express.json());
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 const cache = {};
+const favorites = [];
 
 const TVMAZE_BASE_URL = 'https://api.tvmaze.com';
+const TVMAZE_TIMEOUT_MS = 400;
+
 const DEFAULT_PAGE = 100;
 const DEFAULT_SIZE = 1;
 
 const MOCK_DATA = require('./mock.json');
-
-const TVMAZE_TIMEOUT_MS = 400;
 
 function getCachedOrFetch(url) {
     const now = Date.now();
@@ -62,7 +63,7 @@ function paginate(list, page, size) {
     };
 }
 
-app.get('/api/search/shows', async (req, res) => {
+app.get('/api/search/show', async (req, res) => {
     const {
         q = '',
         genres = '',
@@ -114,6 +115,22 @@ app.get('/api/search/shows', async (req, res) => {
         console.error('Search error:', error.message);
         res.status(500).json({ error: 'Failed to fetch shows' });
     }
+});
+
+app.get('/api/favorite', (req, res) => { res.json(favorites); });
+
+app.post('/api/favorite/:showId', (req, res) => {
+    const { showId } = req.params;
+    const id = parseInt(showId, 10);
+    favorites.push(showId);
+    res.json({ isFavorite: true, showId: id });
+});
+
+app.delete('/api/favorite/:showId', (req, res) => {
+    const { showId } = req.params;
+    const id = parseInt(showId, 10);
+    delete favorites[showId];
+    res.json({ isFavorite: false, showId: id });
 });
 
 const PORT = 3001;

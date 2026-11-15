@@ -3,20 +3,21 @@ import LoaderOverlay from '@components/LoaderOverlay';
 import ShowCard from './ShowCard';
 import ShowsFilter from './ShowsFilter';
 import ShowCardSkeleton from './ShowCardSkeleton';
+import FavoritesButton from './FavoritesButton';
 import usePresenter from './logic/usePresenter';
 import styles from './show-list-page.module.css';
 
 export default function ShowListPage() {
     const {
-        activePage,
+        pagination,
         isLoading,
         changeActivePage,
         pageShows,
-        pagesCount,
     } = usePresenter();
 
     return (
         <div className={ styles.page }>
+            <FavoritesButton />
             <ShowsFilter />
             {
                 pageShows.length > 0 &&
@@ -53,8 +54,7 @@ export default function ShowListPage() {
             }
             <Pagination
                 className={ styles.pagination }
-                activePage={ activePage }
-                pagesCount={ pagesCount }
+                pagination={ pagination }
                 onChangeActivePage={ changeActivePage }
             />
         </div>

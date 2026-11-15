@@ -1,5 +1,5 @@
 import { useShallow } from 'zustand/shallow';
-import { useShowListStore } from '@store/showListStore';
+import useShowListStore from '@store/showListStore';
 
 export default function usePresenter() {
     const {

@@ -52,6 +52,7 @@ export default function MyList() {
 
 Большинство компонентов должны иметь среди props **className**.
 Так родительский компонент сможет влиять на стили дочернего компонента.
+className из родительского компонента никогда не заменяет классы самого компонента, он их расширяет через `@utils/classNames`.
 Подробней в AI rules css-code-style.md, .
 ```ts
 interface IProps {

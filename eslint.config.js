@@ -1,12 +1,13 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules', '.yarn', 'yarn.lock'] },
   {
     extends: [js.configs.recommended],
-    plugins: { 'react-hooks': reactHooks },
+    plugins: { 'react-hooks': reactHooks, 'import': importPlugin },
     rules: {
       ...reactHooks.configs.recommended.rules,
       'no-restricted-imports': ['error', {
@@ -27,6 +28,7 @@ export default tseslint.config(
       'semi': ['error', 'always'],
       '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true }],
       'max-lines': ['error', { max: 120, skipBlankLines: true }],
+      'import/no-anonymous-default-export': ['error', { allowArrowFunction: false, allowAnonymousClass: false, allowAnonymousFunction: false }],
     },
   },
 );

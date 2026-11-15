@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { type IShow } from '@api/show';
+import { type IPagination } from '@ui/pagination';
 import searchShows from '@tasks/searchShows';
 
 export interface IShowListFilter {
@@ -11,10 +12,6 @@ const defaultFilter: IShowListFilter = {
     selectedGenres: [],
 };
 
-export interface IPagination {
-    activePage: number;
-    totalPages: number;
-}
 const defaultPagination: IPagination = {
     activePage: 1,
     totalPages: 0,
@@ -47,7 +44,7 @@ interface IShowListActions {
 
 type IShowListStore = IShowListState & IShowListActions;
 
-export const useShowListStore = create<IShowListStore>((set) => ({
+const useShowListStore = create<IShowListStore>((set, get) => ({
     ...defaultState,
 
     getShows: async (
@@ -78,7 +75,7 @@ export const useShowListStore = create<IShowListStore>((set) => ({
     },
 
     changeFilter: async (filter: IShowListFilter) => {
-        const state = useShowListStore.getState();
+        const state = get();
         const pagination: IPagination = {
             ...state.pagination,
             activePage: 1,
@@ -93,7 +90,7 @@ export const useShowListStore = create<IShowListStore>((set) => ({
     },
 
     changeSearch: async (search) => {
-        const state = useShowListStore.getState();
+        const state = get();
         await state.changeFilter( {
             ...state.filter,
             search,
@@ -101,7 +98,7 @@ export const useShowListStore = create<IShowListStore>((set) => ({
     },
 
     changeSelectedGenres: async (selectedGenres) => {
-        const state = useShowListStore.getState();
+        const state = get();
         await state.changeFilter( {
             ...state.filter,
             selectedGenres,
@@ -109,7 +106,7 @@ export const useShowListStore = create<IShowListStore>((set) => ({
     },
 
     changeActivePage: async (page) => {
-        const state = useShowListStore.getState();
+        const state = get();
 
         const pagination: IPagination = {
             ...state.pagination,
@@ -122,3 +119,5 @@ export const useShowListStore = create<IShowListStore>((set) => ({
 
     reset: () => set(defaultState),
 }));
+
+export default useShowListStore;

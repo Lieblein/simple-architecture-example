@@ -1,54 +1,28 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-
-const HIDE_TIMEOUT = 3000;
-
-export interface INotification {
-    id: number;
-    message: string;
-    type: 'error';
-}
+import { type INotification, type NotificationType } from '@ui/notification';
+import { addNotification } from '../tasks/addNotification';
 
 interface INotificationState {
     notifications: Map<number, INotification>;
 }
 
 interface INotificationActions {
-    addNotification: (message: string, type: 'error') => void;
+    addNotification: (message: string, type: NotificationType) => void;
     removeNotification: (id: number) => void;
 }
 
 type NotificationStore = INotificationState & INotificationActions;
 
-function* idGenerator() {
-    let id = 0;
-    while (true) {
-        yield id++;
-    }
-
-    return 0;
-}
-
-const getNextId = idGenerator();
-
-export const useNotificationStore = create<NotificationStore>()(
+const useNotificationStore = create<NotificationStore>()(
     immer((set) => ({
         notifications: new Map<number, INotification>(),
 
-        addNotification: (message: string, type: 'error') => {
-            const id = getNextId.next().value;
+        addNotification: (message: string, type: NotificationType) => {
+            const notification = addNotification({ message, type });
             set((state) => {
-                state.notifications.set(id, { id, message, type });
+                state.notifications.set(notification.id, notification);
             });
-
-            setTimeout(
-                () => {
-                    set((state) => {
-                        state.notifications.delete(id);
-                    });
-                },
-                HIDE_TIMEOUT,
-            );
         },
 
         removeNotification: (id: number) => {
@@ -58,3 +32,5 @@ export const useNotificationStore = create<NotificationStore>()(
         },
     })),
 );
+
+export default useNotificationStore;

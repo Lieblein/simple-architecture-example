@@ -1,0 +1,11 @@
+.button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 60px;
+    min-width: 60px;
+}
