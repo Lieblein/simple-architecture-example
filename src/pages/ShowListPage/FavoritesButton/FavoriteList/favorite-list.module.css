@@ -7,3 +7,21 @@
     margin-right: -4px;
     padding-right: 4px;
 }
+
+.skeleton {
+    width: 145px;
+    height: 56px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary-light);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}

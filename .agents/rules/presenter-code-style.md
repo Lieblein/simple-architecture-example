@@ -25,9 +25,7 @@ Presenter получает данные из Zustand store. View не долже
 const shows = useShowListStore(({ shows }) => shows);
 ```
 
-Для нескольких свойств **всегда** используем useShallow и деструктурируем store.
-Каждое свойство с новой строки.
-С обработчиками поступаем точно также, как и с данными:
+Для нескольких свойств **всегда** используем useShallow:
 ```tsx
 const {
     search,
@@ -45,27 +43,26 @@ const {
 );
 ```
 
-В usePresenter обычно не более 1 использования одного стора. 
+**Один и тот же стор используется не более одного раза** в presenter.
 
-Исключение - использование селекторов.
-Тогда можно несколько раз изпользовать один стор:
+Исключение — использование селекторов. Тогда тот же стор можно использовать ещё раз через селектор:
 ```tsx
+// Один стор — один вызов с useShallow
 const {
     search,
     resetFilter,
 } = useShowListStore(
-    useShallow(
-        ({
-            search,
-            resetFilter,
-        }) => ({
-            search,
-            resetFilter,
-        }),
-    ),
+    useShallow(({ search, resetFilter }) => ({ search, resetFilter })),
 );
 
+// Тот же стор ещё раз — только через селектор
 const pageShows = useShowListStore(selectPageShows);
+```
+
+**Разные сторы** можно использовать независимо:
+```tsx
+const shows = useShowListStore(({ shows }) => shows);
+const favoriteShows = useFavoritesStore(({ favoriteShows }) => favoriteShows);
 ```
 
 ## Обработка событий
