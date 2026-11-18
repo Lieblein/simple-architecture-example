@@ -11,7 +11,6 @@ export default function FavoriteToggleButton(props: Readonly<IProps>) {
         click,
     } = usePresenter(props);
 
-    // TODO: круглая кликабельная зона
     return (
         <button
             className={ classNames(className, styles.button) }

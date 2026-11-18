@@ -1,0 +1,78 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1999;
+}
+
+.popover {
+    position: fixed;
+    top: -9999px;
+    z-index: -1;
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    padding: 8px;
+    box-shadow: 0 8px 24px var(--box-shadow-2);
+    animation: fade-in 0.2s ease-out;
+
+    &.open {
+        z-index: 2000;
+    }
+}
+
+.top {
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-135deg);
+    }
+}
+
+.bottom {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::before {
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+
+.left {
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::before {
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%) rotate(135deg);
+    }
+}
+
+.right {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    &::before {
+        left: -8px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

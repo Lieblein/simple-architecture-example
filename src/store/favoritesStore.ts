@@ -24,6 +24,7 @@ const useFavoritesStore = create<FavoritesStore>()(
         getFavorites: async () => {
             set({ isLoading: true });
             const favorites = await sendRequest<IShow[]>('GET', '/api/favorite');
+
             set({
                 favoriteShows: new Map(favorites.map((show) => [show.id, show])),
                 isLoading: false,

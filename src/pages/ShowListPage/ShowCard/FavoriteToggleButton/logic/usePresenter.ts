@@ -4,6 +4,7 @@ import { type IProps } from '../types';
 
 export default function usePresenter(props: Readonly<IProps>) {
     const { show } = props;
+
     const {
         isFavorite,
         toggleShowFavorite,
@@ -17,8 +18,9 @@ export default function usePresenter(props: Readonly<IProps>) {
         })),
     );
 
-    // TODO: блокировка и прелоадер
-    const click = () => toggleShowFavorite(show, !isFavorite);
+    const click = () => {
+        toggleShowFavorite(show, !isFavorite);
+    };
 
     return {
         isFavorite,

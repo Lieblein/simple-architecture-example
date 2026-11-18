@@ -1,7 +1,9 @@
+import { type Ref } from 'react';
 import classNames from '@utils/classNames';
 import styles from './button.module.css';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    ref?: Ref<HTMLButtonElement>; 
 }
 
 export default function Button(props: Readonly<IProps>) {
