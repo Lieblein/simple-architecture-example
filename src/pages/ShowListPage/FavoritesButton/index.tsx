@@ -3,6 +3,7 @@ import StarIcon from '../components/StarIcon';
 import Popover from './Popover';
 import usePresenter from './logic/usePresenter';
 import styles from './favorites-button.module.css';
+import FavoriteList from './FavoriteList';
 
 export default function FavoritesButton() {
     const {
@@ -20,6 +21,7 @@ export default function FavoritesButton() {
                 className={ styles.button }
                 onClick={ click }
                 ref={ buttonRef }
+                disabled={ favoriteCount === 0 }
             >
                 { favoriteCount }
                 <StarIcon
@@ -32,7 +34,7 @@ export default function FavoritesButton() {
                 open={ popoverOpen }
                 onClose={ closePopover }
             >
-                123
+                <FavoriteList />
             </Popover>
         </>
     );
