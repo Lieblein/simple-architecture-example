@@ -55,6 +55,7 @@ export default async function searchShows(params: ISearchShowsParams) {
         const data = await sendRequest<ISearchShowsResponse>(
             'GET',
             `/api/search/show?${queryParams.toString()}`,
+            undefined,
             { abortControllerSignal },
         );
 

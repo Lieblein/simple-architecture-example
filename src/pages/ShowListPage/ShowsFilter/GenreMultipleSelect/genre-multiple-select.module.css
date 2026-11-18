@@ -7,7 +7,7 @@
 .chip {
     cursor: pointer;
     background-color: var(--color-background);
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius);
     padding: 8px 16px;
     border: 2px solid var(--color-secondary);
     transition: border-color .2s, background-color .2s, color .2s, opacity .2s;

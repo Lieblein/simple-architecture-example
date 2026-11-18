@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/shallow';
 import { type IProps } from '../types';
 
 export default function usePresenter(props: Readonly<IProps>) {
-    const { showId } = props;
+    const { show } = props;
     const {
         isFavorite,
         toggleShowFavorite,
@@ -12,13 +12,13 @@ export default function usePresenter(props: Readonly<IProps>) {
             favoriteShows,
             toggleShowFavorite,
         }) => ({
-            isFavorite: favoriteShows.has(showId),
+            isFavorite: favoriteShows.has(show.id),
             toggleShowFavorite,
         })),
     );
 
     // TODO: блокировка и прелоадер
-    const click = () => toggleShowFavorite(showId, !isFavorite);
+    const click = () => toggleShowFavorite(show, !isFavorite);
 
     return {
         isFavorite,

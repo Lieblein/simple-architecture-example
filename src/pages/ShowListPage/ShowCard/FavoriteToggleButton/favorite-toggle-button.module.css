@@ -3,12 +3,18 @@
     border: none;
     cursor: pointer;
     color: var(--color-primary);
-    transition: color 0.2s;
+    transition: color 0.2s, background-color 0.2s;
     padding: 0;
     line-height: 1;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    width: 36px;
+    height: 36px;
 
     &:hover {
         color: var(--color-primary-dark);
+        background-color: #fff8;
     }
 }

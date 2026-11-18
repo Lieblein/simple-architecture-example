@@ -3,7 +3,7 @@
     align-items: center;
     gap: 12px;
     padding: 12px 20px;
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius);
     font-size: 14px;
     font-weight: 500;
     box-shadow: 0 4px 12px var(--box-shadow-2);

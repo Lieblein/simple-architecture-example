@@ -7,7 +7,7 @@ app.use(express.json());
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 const cache = {};
-const favorites = [];
+const favorites = new Map();
 
 const TVMAZE_BASE_URL = 'https://api.tvmaze.com';
 const TVMAZE_TIMEOUT_MS = 400;
@@ -117,19 +117,22 @@ app.get('/api/search/show', async (req, res) => {
     }
 });
 
-app.get('/api/favorite', (req, res) => { res.json(favorites); });
+app.get('/api/favorite', (req, res) => {
+    res.json(Array.from(favorites.values()));
+});
 
 app.post('/api/favorite/:showId', (req, res) => {
     const { showId } = req.params;
     const id = parseInt(showId, 10);
-    favorites.push(showId);
+    const show = req.body;
+    favorites.set(id, show);
     res.json({ isFavorite: true, showId: id });
 });
 
 app.delete('/api/favorite/:showId', (req, res) => {
     const { showId } = req.params;
     const id = parseInt(showId, 10);
-    delete favorites[showId];
+    favorites.delete(id);
     res.json({ isFavorite: false, showId: id });
 });
 

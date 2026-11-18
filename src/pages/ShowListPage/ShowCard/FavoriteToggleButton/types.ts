@@ -1,4 +1,6 @@
+import { type IShow } from '@api/show';
+
 export interface IProps {
     className?: string;
-    showId: number;
+    show: IShow;
 }

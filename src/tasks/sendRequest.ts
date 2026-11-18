@@ -3,13 +3,16 @@ type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
 export default async function sendRequest<Response>(
     method: RequestMethod,
     url: string,
-    options: { abortControllerSignal?: AbortSignal; } = {},
+    body?: object,
+    options: { abortControllerSignal?: AbortSignal;  } = {},
 ): Promise<Response> {
     const response = await fetch(
         url,
         {
             method,
             signal: options?.abortControllerSignal,
+            headers: body ? { 'Content-Type': 'application/json' } : undefined,
+            body: body ? JSON.stringify(body) : undefined,
         },
     );
 

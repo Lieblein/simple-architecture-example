@@ -25,9 +25,7 @@ export default function ShowCard(props: Readonly<IProps>) {
                 <h4 className={ styles.name }>
                     { name.toLowerCase() }
                 </h4>
-                <FavoriteToggleButton
-                    showId={ show.id }
-                />
+                <FavoriteToggleButton show={ show } />
             </div>
             <div className={ styles.imageContainer }>
                 {

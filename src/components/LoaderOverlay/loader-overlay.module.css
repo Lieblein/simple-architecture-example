@@ -3,7 +3,7 @@
     position: absolute;
     inset: 0;
     background-color: #00000010;
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;

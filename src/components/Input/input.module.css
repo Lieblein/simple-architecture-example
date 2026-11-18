@@ -2,7 +2,7 @@
     height: var(--control-height);
     line-height: 20px;
     font-size: 16px;
-    border-radius: var(--border-radius-l);
+    border-radius: var(--border-radius);
     border: 2px solid var(--color-primary);
     background-color: var(--color-background);
     color: var(--color-text);
