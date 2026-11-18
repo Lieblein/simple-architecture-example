@@ -1,6 +1,6 @@
 import classNames from '@utils/classNames';
 import usePresenter from './logic/usePresenter';
-import FavoriteCard from '../FavoriteCard';
+import FavoriteCard from './FavoriteCard';
 import { type IProps } from './types';
 import styles from './favorite-list.module.css';
 
