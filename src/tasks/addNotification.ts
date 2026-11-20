@@ -11,23 +11,22 @@ function* idGenerator() {
 
 const getNextId = idGenerator();
 
-const HIDE_TIMEOUT = 3 * 1000;
+const AUTO_HIDE_TIMEOUT = 3 * 1000;
 
-export interface IAddNotificationParams {
-    message: string;
-    type: NotificationType;
-}
-
-export function addNotification({ message, type }: IAddNotificationParams): INotification {
+export default function addNotification(message: string, type: NotificationType): INotification {
     const id = getNextId.next().value;
     const notification: INotification = { id, message, type };
+    useNotificationStore.getState().setNotification(notification);
+    autoHideNotification(id);
 
+    return notification;
+}
+
+function autoHideNotification(id: number) {
     setTimeout(
         () => {
             useNotificationStore.getState().removeNotification(id);
         },
-        HIDE_TIMEOUT,
+        AUTO_HIDE_TIMEOUT,
     );
-
-    return notification;
 }

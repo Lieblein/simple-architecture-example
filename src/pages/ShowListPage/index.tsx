@@ -11,8 +11,8 @@ export default function ShowListPage() {
     const {
         pagination,
         isLoading,
-        changeActivePage,
         pageShows,
+        onChangeActivePage,
     } = usePresenter();
 
     return (
@@ -55,7 +55,7 @@ export default function ShowListPage() {
             <Pagination
                 className={ styles.pagination }
                 pagination={ pagination }
-                onChangeActivePage={ changeActivePage }
+                onChangeActivePage={ onChangeActivePage }
             />
         </div>
     );

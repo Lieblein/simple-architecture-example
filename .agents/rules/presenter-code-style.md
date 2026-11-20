@@ -28,31 +28,39 @@ const shows = useShowListStore(({ shows }) => shows);
 Для нескольких свойств **всегда** используем useShallow:
 ```tsx
 const {
-    search,
-    resetFilter,
+    filter,
+    pagination,
 } = useShowListStore(
     useShallow(
         ({
-            search,
-            resetFilter,
+            filter,
+            pagination,
         }) => ({
-            search,
-            resetFilter,
+            filter,
+            pagination,
         }),
     ),
 );
 ```
 
-**Один и тот же стор используется не более одного раза** в presenter.
+**Один и тот же стор используется не более одного раза** в `usePresenter.tsx`. Это же правило действует для tasks и hooks, работающих с тем же стором.
 
 Исключение — использование селекторов. Тогда тот же стор можно использовать ещё раз через селектор:
 ```tsx
 // Один стор — один вызов с useShallow
 const {
-    search,
-    resetFilter,
+    filter,
+    pagination,
 } = useShowListStore(
-    useShallow(({ search, resetFilter }) => ({ search, resetFilter })),
+    useShallow(
+        ({
+            filter,
+            pagination,
+        }) => ({
+            filter,
+            pagination,
+        }),
+    ),
 );
 
 // Тот же стор ещё раз — только через селектор
@@ -68,11 +76,14 @@ const favoriteShows = useFavoritesStore(({ favoriteShows }) => favoriteShows);
 ## Обработка событий
 
 - Без острой необходимости не используем React useCallback.
-- Названия обработчиков НЕ должны начинаться с `on` или `handle`.
-- Обработчики называем по действию: `keyDown`, `clickOutside`, `remove` и т.д.
+- Названия обработчиков НЕ должны начинаться с `handle`.
+- Обработчик должен начинаться с `on`.
+- Обработчики называем по действию: `onKeyDown`, `onClickOutside`, `remove` и т.д.
 
 
 ## Возвращаемое значение
 
 - Возвращаем объект с данными и обработчиками для View.
 - Даже если в объекте 1 свойство всё равно возвращаем объект. Делаем так для более простого расширения в будущем.
+
+TODO: примеры кода

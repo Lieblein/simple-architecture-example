@@ -1,10 +1,12 @@
 import createTemplate from './createTemplate.js';
 
-const [,, type, componentName, directory = 'components'] = process.argv;
+let [,, type, componentName, directory = 'components'] = process.argv;
 
 const validTypes = ['view', 'presenter'];
 if (!type || !validTypes.includes(type)) {
-    throw new Error(`Укажите сущность ${validTypes.join(' или ')}`);
+    directory = componentName ?? 'components';
+    componentName = type;
+    type = 'presenter';
 }
 
 

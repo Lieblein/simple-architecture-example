@@ -10,18 +10,20 @@ alwaysApply: false
 
 ## Основной принцип разделения отвественности
 
-Файл `index.tsx` - View слой из VIPER.
-Он содержит только логику отображения.
-Всё взаимодействие с внешним миром через hook **usePresenter**.
+JSX-компонент без логики. Получает данные и колбэки из usePresenter или через props.
 
-Разрешено:
-- получать данные из usePresenter,
+**Ответственность:** отображение данных и вызов переданных колбэков.
+
+**Можно:**
+- использовать hook usePresenter,
 - получать данные из props,
 - conditional rendering.
 
-Запрещено:
-- использовать любые другие hook-и кроме usePresenter,
-- писать файлы длиннее 120 строчек.
+**Нельзя**:
+- использовать hooks, кроме usePresenter и useRef,
+- подключаться к store,
+- содержать какую-либо логику,
+- определять колбэки (это ответственность usePresenter).
 
 ---
 
@@ -89,10 +91,9 @@ export default function MyList(props: Readonly<IProps>) {
 |---------|------------|--------|
 | Папка | PascalCase | `ShowCard/` |
 | View файл | `index.tsx` | `index.tsx` |
-| Стили | kebab-case + `.module.css` | `show-card.module.css` |
+| Стили | kebab-case + `*.module.css` | `show-card.module.css` |
 | Интерфейс пропсов | `IProps` | `interface IProps { ... }` |
 | Presenter хук | `usePresenter.tsx` | `usePresenter.tsx` |
-| CSS классы | kebab-case | `.card`, `.image-container` |
 
 ---
 
@@ -122,10 +123,10 @@ export default function MyList(props: Readonly<IProps>) {
 ```tsx
     {
         isLoading
-          ? <Loader />
-          : <ul className={ styles.showList }>
-              ...
-          </ul>
+            ? <Loader />
+            : <ul className={ styles.showList }>
+                ...
+            </ul>
     }
 ```
 
@@ -148,3 +149,5 @@ yarn generate presenter show-card pages/ShowListPage
 Следовать структуре директорий и соглашениям по именованию из **AGENTS.md**.
 
 ---
+
+TODO: примеры кода

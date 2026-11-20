@@ -29,6 +29,7 @@ export default async(type, componentName, directory) => {
         await fs.writeFile(`${dirPath}/types.ts`, generateTypes());
         await fs.mkdir(`${dirPath}/logic`, { recursive: true });
         await fs.writeFile(`${dirPath}/logic/usePresenter.tsx`, generatePresenter());
+        await fs.mkdir(`${dirPath}/logic/tasks`, { recursive: true });
         await fs.writeFile(`${dirPath}/index.tsx`, generateViewWithPresenter(fileName, stylePathName));
     }
 

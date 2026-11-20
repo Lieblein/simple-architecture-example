@@ -41,7 +41,7 @@ export const useNotificationStore = create()(
 );
 ```
 - Разделяем описание интерфейсов для state и actions:
-```
+```ts
 interface INotificationState {
     notifications: Map<number, INotification>;
 }
@@ -72,19 +72,17 @@ export default function usePresenter(props: Readonly<IProps>) {
     const {
         search,
         activePage,
-        resetFilter,
     } = useShowListStore(
         useShallow(({
             search,
             activePage,
-            resetFilter,
         }) => ({
             search,
             activePage,
-            resetFilter,
         })),
     );
 
     return { ... };
 }
 ```
+TODO: примеры кода

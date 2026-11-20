@@ -1,19 +1,9 @@
-import { useShallow } from 'zustand/shallow';
 import useFavoritesStore from '@store/favoritesStore';
+import useLoadFavorites from './useLoadFavorites';
 
 export default function usePresenter() {
-    const {
-        favoriteShows,
-        isLoading,
-    } = useFavoritesStore(
-        useShallow(({
-            favoriteShows,
-            isLoading,
-        }) => ({
-            favoriteShows,
-            isLoading,
-        })),
-    );
+    const favoriteShows = useFavoritesStore(({ favoriteShows }) => favoriteShows);
+    const isLoading = useLoadFavorites();
 
     return {
         favoriteShows: Array.from(favoriteShows.values()),

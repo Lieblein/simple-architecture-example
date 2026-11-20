@@ -1,48 +1,40 @@
 import { useShallow } from 'zustand/shallow';
-import { useEffect } from 'react';
 import useShowListStore from '@store/showListStore';
-import useFavoritesStore from '@store/favoritesStore';
+import searchShows from './tasks/searchShows';
 
 export default function usePresenter() {
     const {
+        filter,
         pagination,
-        isLoading,
-        changeActivePage,
         shows,
+        isLoading,
     } = useShowListStore(
         useShallow(({
+            filter,
             pagination,
-            isLoading,
-            changeActivePage,
             shows,
+            isLoading,
         }) => ({
+            filter,
             pagination,
-            isLoading,
-            changeActivePage,
             shows,
+            isLoading,
         })),
     );
 
-    const {
-        getFavorites,
-        favoriteShows,
-    } = useFavoritesStore(
-        useShallow(({
-            getFavorites,
-            favoriteShows,
-        }) => ({
-            getFavorites,
-            favoriteShows,
-        })),
-    );
-
-    useEffect(() => {  getFavorites(); }, []);
+    // TODO: описать запрет реактивности и лишнего использования useEffect
+    const onChangeActivePage = (page: number) => {
+        searchShows({
+            query: filter.search,
+            genres: filter.selectedGenres,
+            page,
+        });
+    };
 
     return {
         pagination,
         isLoading,
-        changeActivePage,
         pageShows: shows,
-        favoriteShows,
+        onChangeActivePage,
     };
 }

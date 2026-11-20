@@ -1,6 +1,7 @@
 import { type IShow } from '@api/show';
-import useNotificationStore from '@store/notificationStore';
-import sendRequest from './sendRequest';
+import useFavoritesStore from '@store/favoritesStore';
+import addNotification from '@tasks/addNotification';
+import sendRequest from '@tasks/sendRequest';
 
 export default async function toggleFavorite(show: IShow, newIsFavorite: boolean) {
     try {
@@ -11,14 +12,21 @@ export default async function toggleFavorite(show: IShow, newIsFavorite: boolean
             newIsFavorite ? show : undefined,
         );
 
-        useNotificationStore.getState().addNotification(
+        addNotification(
             newIsFavorite
                 ? 'Добавлено в избранное'
                 : 'Удалено из избранного',
             'success'
         );
+
+        if (newIsFavorite) {
+            useFavoritesStore.getState().addToFavorites(show);
+        } else {
+            useFavoritesStore.getState().deleteFromFavorites(show);
+        }
+
+        return newIsFavorite;
     } catch (error) {
-        useNotificationStore.getState().addNotification('Ошибка при обновлении избранного', 'error');
-        throw error;
+        addNotification('Ошибка при обновлении избранного', 'error');
     }
 }

@@ -1,6 +1,7 @@
 import { type IShow } from '@api/show';
 import sendRequest from '@tasks/sendRequest';
-import useNotificationStore from '@store/notificationStore';
+import addNotification from '../../../../tasks/addNotification';
+import useShowListStore from '@store/showListStore';
 
 const ITEMS_PER_PAGE = 3;
 
@@ -29,9 +30,22 @@ interface ISearchShowsResponse {
 export default async function searchShows(params: ISearchShowsParams) {
     const { query, page, genres } = params;
 
+    const {
+        setShows,
+        setFilter,
+        setPagination,
+        setPage,
+        setAvailableGenres,
+        setIsLoading,
+        reset,
+    } = useShowListStore.getState();
+
+    setFilter({ search: query, selectedGenres: genres });
+    setPage(page);
+
     try {
         if (query.trim() === '') {
-            return {
+            const response = {
                 shows: [],
                 pagination: {
                     activePage: 1,
@@ -39,7 +53,13 @@ export default async function searchShows(params: ISearchShowsParams) {
                 },
                 availableGenres: [],
             };
+
+            reset();
+
+            return response;
         }
+
+        setIsLoading(true);
 
         const queryParams = new URLSearchParams({
             q: query.trim(),
@@ -52,28 +72,40 @@ export default async function searchShows(params: ISearchShowsParams) {
         }
 
         const abortControllerSignal = updateAbortController();
-        const data = await sendRequest<ISearchShowsResponse>(
+        const {
+            items,
+            page: activePage,
+            total,
+            size,
+            genres: availableGenres,
+        } = await sendRequest<ISearchShowsResponse>(
             'GET',
             `/api/search/show?${queryParams.toString()}`,
             undefined,
             { abortControllerSignal },
         );
 
-        return {
-            shows: data.items,
+        const response = {
+            shows: items,
             pagination: {
-                activePage: data.page,
-                totalPages: Math.ceil(data.total / data.size) || 1,
+                activePage,
+                totalPages: Math.ceil(total / size) || 1,
             },
-            availableGenres: data.genres,
+            availableGenres,
         };
+
+        setShows(items);
+        setPagination(response.pagination);
+        setAvailableGenres(availableGenres);
+
+        return response;
     } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
             return null;
         }
 
-        // TODO: где лучше обрабатывать ошибки?
-        useNotificationStore.getState().addNotification('Ошибка загрузки данных', 'error');
-        throw error;
+        addNotification('Ошибка загрузки данных', 'error');
+    } finally {
+        setIsLoading(false);
     }
 }

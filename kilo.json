@@ -1,11 +1,13 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
   "instructions": [
+    "AGENTS.md",
     ".agents/rules/ts-code-style.md",
     ".agents/rules/presenter-code-style.md",
     ".agents/rules/view-code-style.md",
     ".agents/rules/css-code-style.md",
-    ".agents/rules/zustand-code-style.md",
-    "AGENTS.md"
+    ".agents/rules/store-code-style.md",
+    ".agents/rules/interactor-code-style.md",
+    ".agents/skills/view-to-presenter.md"
   ]
 }

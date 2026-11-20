@@ -1,5 +1,3 @@
-import styles from './star-icon.module.css';
-
 interface StarIconProps {
     className?: string;
     variant: 'filled' | 'outlined';

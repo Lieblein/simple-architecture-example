@@ -1,12 +1,33 @@
 import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 import { type IShow } from '@api/show';
 import { type IPagination } from '@ui/pagination';
-import searchShows from '@tasks/searchShows';
 
 export interface IShowListFilter {
     search: string;
     selectedGenres: string[];
 }
+
+interface IShowListState {
+    shows: IShow[];
+    filter: IShowListFilter;
+    pagination: IPagination;
+    availableGenres: string[];
+    isLoading: boolean;
+}
+
+interface IShowListActions {
+    setShows: (shows: IShow[]) => void;
+    setFilter: (filter: IShowListFilter) => void;
+    setPagination: (pagination: IPagination) => void;
+    setPage: (page: number) => void;
+    setAvailableGenres: (genres: string[]) => void;
+    setIsLoading: (isLoading: boolean) => void;
+    reset: () => void;
+}
+
+type IShowListStore = IShowListState & IShowListActions;
+
 const defaultFilter: IShowListFilter = {
     search: '',
     selectedGenres: [],
@@ -17,107 +38,34 @@ const defaultPagination: IPagination = {
     totalPages: 0,
 };
 
-interface IShowListState {
-    shows: IShow[];
-    isLoading: boolean;
-    filter: IShowListFilter;
-    pagination: IPagination;
-    availableGenres: string[];
-}
+const useShowListStore = create<IShowListStore>()(
+    immer((set) => ({
+        shows: [],
+        filter: defaultFilter,
+        pagination: defaultPagination,
+        availableGenres: [],
+        isLoading: false,
 
-const defaultState: IShowListState = {
-    shows: [],
-    isLoading: false,
-    availableGenres: [],
-    filter: defaultFilter,
-    pagination: defaultPagination,
-};
+        setShows: (shows) => set({ shows }),
 
-interface IShowListActions {
-    getShows: (filter: IShowListFilter, pagination: IPagination) => Promise<void>;
-    changeFilter: (filter: IShowListFilter) => Promise<void>;
-    changeSearch: (search: string) => Promise<void>;
-    changeSelectedGenres: (genres: string[]) => Promise<void>;
-    changeActivePage: (page: number) => Promise<void>;
-    reset: () => void;
-}
+        setFilter: (filter) => set({ filter }),
 
-type IShowListStore = IShowListState & IShowListActions;
+        setPagination: (pagination) => set({ pagination }),
 
-const useShowListStore = create<IShowListStore>((set, get) => ({
-    ...defaultState,
+        setPage: (page) => set((state) => { state.pagination.activePage = page; }),
 
-    getShows: async (
-        filter: IShowListFilter,
-        pagination: IPagination,
-    ) => {
-        set({ isLoading: true });
+        setAvailableGenres: (availableGenres) => set({ availableGenres }),
 
-        const response = await searchShows({
-            query: filter.search,
-            genres: filter.selectedGenres,
-            page: pagination.activePage,
-        });
+        setIsLoading: (isLoading) => set({ isLoading }),
 
-        if (response) {
-            const {
-                shows,
-                pagination,
-                availableGenres,
-            } = response;
-            set({
-                shows,
-                pagination,
-                availableGenres,
-                isLoading: false,
-            });
-        }
-    },
-
-    changeFilter: async (filter: IShowListFilter) => {
-        const state = get();
-        const pagination: IPagination = {
-            ...state.pagination,
-            activePage: 1,
-        };
-
-        set({
-            filter,
-            pagination,
-        });
-
-        await state.getShows(filter, pagination);
-    },
-
-    changeSearch: async (search) => {
-        const state = get();
-        await state.changeFilter( {
-            ...state.filter,
-            search,
-        });
-    },
-
-    changeSelectedGenres: async (selectedGenres) => {
-        const state = get();
-        await state.changeFilter( {
-            ...state.filter,
-            selectedGenres,
-        });
-    },
-
-    changeActivePage: async (page) => {
-        const state = get();
-
-        const pagination: IPagination = {
-            ...state.pagination,
-            activePage: page,
-        };
-        set({ pagination });
-
-        await state.getShows(state.filter, pagination);
-    },
-
-    reset: () => set(defaultState),
-}));
+        reset: () => set({
+            shows: [],
+            filter: defaultFilter,
+            pagination: defaultPagination,
+            availableGenres: [],
+            isLoading: false,
+        }),
+    })),
+);
 
 export default useShowListStore;

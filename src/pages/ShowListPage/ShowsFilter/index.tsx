@@ -11,10 +11,9 @@ interface IProps {
 
 export default function ShowsFilter({ className }: IProps) {
     const {
-        search,
-        changeSearch,
-        selectedGenres,
-        changeSelectedGenres,
+        filter,
+        onChangeSearch,
+        onChangeSelectedGenres,
         reset,
     } = usePresenter();
 
@@ -25,8 +24,8 @@ export default function ShowsFilter({ className }: IProps) {
                     <DebouncedInput
                         className={ styles.search }
                         name='search'
-                        value={ search }
-                        onChange={ changeSearch }
+                        value={ filter.search }
+                        onChange={ onChangeSearch }
                         debounceTimeout={ 200 }
                         placeholder='поиск...'
                     />
@@ -35,8 +34,8 @@ export default function ShowsFilter({ className }: IProps) {
                     </Button>
                 </div>
                 <GenreMultipleSelect
-                    value={ selectedGenres }
-                    onChange={ changeSelectedGenres }
+                    value={ filter.selectedGenres }
+                    onChange={ onChangeSelectedGenres }
                 />
             </div>
         </div>

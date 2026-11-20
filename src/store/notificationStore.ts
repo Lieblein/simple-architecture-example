@@ -1,14 +1,13 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { type INotification, type NotificationType } from '@ui/notification';
-import { addNotification } from '../tasks/addNotification';
+import { type INotification } from '@ui/notification';
 
 interface INotificationState {
     notifications: Map<number, INotification>;
 }
 
 interface INotificationActions {
-    addNotification: (message: string, type: NotificationType) => void;
+    setNotification: (notification: INotification) => void;
     removeNotification: (id: number) => void;
 }
 
@@ -18,8 +17,7 @@ const useNotificationStore = create<NotificationStore>()(
     immer((set) => ({
         notifications: new Map<number, INotification>(),
 
-        addNotification: (message: string, type: NotificationType) => {
-            const notification = addNotification({ message, type });
+        setNotification: (notification: INotification) => {
             set((state) => {
                 state.notifications.set(notification.id, notification);
             });

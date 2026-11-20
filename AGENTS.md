@@ -10,15 +10,101 @@ React-приложение, демонстрирующее имплемента�
 
 ### VIPER модули
 
-| Понятие | Описание |
-| ------- | -------- |
+| Понятие | Краткое описание |
+| ------- | ---------------- |
 | **View** | JSX-компонент без логики |
-| **Interactor** | tasks = бизнес-логика приложения. Не зависит от выбора фреймворка для View или state manager-а для Entity |
-| **Presenter** | hook `usePresenter`. Логика компонента: подготовка данных, обработка событий. Не содержит бизнес-логику. Это мостик между view и store и между view и tasks |
-| **Entity** | Zustand store. Хранилище данных. Не содержит бизнес-логику. Только get/set данных, польше ничего. |
-| **Router** (wip) | Глобальные переходы между страницами |
+| **Interactor** | Логика приложения (tasks) |
+| **Presenter** | Мост View и Entity или между View и Interactor (usePresenter) |
+| **Entity** | Zustand store (данные) |
+| **Router** (wip) | Глобальные переходы |
 
 *wip = work in progress. Эту часть ещё не реализовали.
+
+        usePresenter            useStore   ┌────────┐
+      ┌───────────────┐     ┌───────────── │ Entity │
+      ▼               │     ▼              └────────┘         
+   ┌──────┐  click  ┌───────────┐               ▲
+   │ View │ ──────► │ Presenter │               │ set
+   └──────┘         └───────────┘   ┌───────────┴──┐
+                           └──────► │  Interactor  │
+                            load    └──────────────┘ 
+
+Данные хранятся в Entity, переходят через Presenter в View.
+Пользователь взаимодействует с View, вызывается обработчик в Presenter, запускаются задачи в Interactor, который обновляет данные в Entity.
+И снова по кругу.
+
+#### View = JSX
+
+JSX-компонент без логики. Получает данные и колбэки из usePresenter или через props.
+
+**Ответственность:** отображение данных и вызов переданных колбэков.
+
+**Можно:**
+- использовать hook usePresenter,
+- получать данные из props,
+- conditional rendering.
+
+**Нельзя**:
+- использовать hooks, кроме usePresenter и useRef,
+- подключаться к store,
+- сожержать какую-либо логику.
+
+Примеры кода и подробное описание смотри в `.agents/rules/view-code-style.md`.
+
+#### Interactor = task
+
+Вся логика приложения. Самая важная и оъёмная часть приложения.
+Глобальная логика находится в `src/tasks/`. Например: `addNotification.ts`.
+Логика, которая относится в какому-либо компоненту находится внутри этого компонента в папке `logic/tasks/`. Например: `toggleFavorite.ts`.
+**Название файла всегда глагол**.
+Не зависит от выбора фреймворка для View или state manager-а для Entity.
+
+**Ответственность:** любая логика приложения. Только Interactor может записывать что-то в Entity.
+
+**Можно:**
+- получать данные из store,
+- вызывать методы записи в store,
+- вызывать другие task-и,
+- обрабатывать ошибки,
+- возвращать результат выполнения.
+
+**Нельзя**:
+- создавать циклические зависимости task-ов,
+- вызывать hooks (= зависеть от выбора View).
+
+Примеры кода и подробное описание смотри в `.agents/rules/interactor-code-style.md`.
+
+#### Presenter = usePresenter hook
+
+Это мостик между View и Entity или между View и Interactor. Сам логику не содержит.
+`usePresenter` достаёт данные из store и передаёт их в View.
+Также `usePresenter` вызывает task-и, где и сосредоточена вся логика.
+
+**Ответственность:** подготовка данных для отображения, обработка событий от View, вызов tasks и обновление Entity.
+
+**Можно:**
+- получать данные из store,
+- вызывать задачи.
+
+**Нельзя**:
+- вызывать колбэки напрямую из store,
+- содержать логику.
+
+Примеры кода и подробное описание смотри в `.agents/rules/presenter-code-style.md`.
+
+#### Entity
+
+Zustand store. Хранилище данных. Не содержит бизнес-логику. Только get/set данных, больше ничего.
+
+**Ответственность:** хранение состояния, синхронные и асинхронные операции с данными.
+
+Примеры кода и подробное описание смотри в `.agents/rules/store-code-style.md`.
+
+#### Router (wip)
+
+Глобальные переходы между страницами. Работа с навигацией приложения.
+
+*Ещё не реализован.*
 
 ### Структура директорий
 
@@ -32,6 +118,8 @@ src/
 │   └── ComponentName/                  # Пример компонента с логикой. Название компонента = ComponentName
 │       ├── index.tsx                   # View
 │       └── logic                       # Логика компонента
+│       │   ├── tasks                   # Interactor
+│       │   |   └── loadData.tsx        # Пример Interactor-а
 │       │   └── usePresenter.tsx        # Presenter
 │       ├── types.ts                    # IProps и другие интерфейсы, которые использует только этот компонент
 │       └── component-name.module.css   # Стили
@@ -42,6 +130,8 @@ src/
 │       │                               # Правила оформления аналогичны компоненту из UI Kit-а
 │       ├── index.tsx                   # View
 │       └── logic                       # Логика компонента
+│       │   ├── tasks                   # Interactor
+│       │   |   └── loadData.tsx        # Пример Interactor-а
 │       │   └── usePresenter.tsx        # Presenter
 │       ├── types.ts                    # IProps и другие интерфейсы, которые использует только этот компонент
 │       ├── page-name.module.css        # Стили
@@ -64,6 +154,33 @@ src/
 ├── utils/                              # Общие утилиты (TODO: придумать нужное место)
 └── types/                              # Общие типы
 ```
+
+## Часто используемые hooks
+
+При загрузке и отправке данных необходимо показывать прелоадер.
+Не храним флаги `isLoading`, `isFetching` или подобное в store. TODO: описать, когда всё таки храним
+Для отображения прелоадеров используем hook `useLoad*` или `useFetch*`.
+Пример `useLoadFavorites.tsx`:
+```tsx
+export default function useLoadFavorites() {
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(
+        () => {
+            (async () => {
+                setIsLoading(true);
+                await loadFavorites();
+                setIsLoading(false);
+            })();
+        },
+        [],
+    );
+
+    return isLoading;
+}
+```
+
+Подобные hook-и используем в `usePresenter` и складываем рядом с ним.
 
 ## Команды
 
@@ -95,7 +212,7 @@ src/
 
 У нас есть 2 типа компонентов:
 - `view`,
-- `presenter`.
+- `presenter` (по умолчанию, можно не указывать).
 
 `view` - это простейший компонент без логики. Он только отображает данные. Никаких hook-ов он вызывать не может.
 
@@ -105,5 +222,7 @@ src/
 
 Вызываем команду `yarn generate <view/presenter> <название компонента> <директория относительно src>`.
 
-Пример удачной команды для создания уже существующего компонента ShowCard:
-`yarn generate view show-card pages/ShowListPage`.
+Пример команд:
+- `yarn generate debounced-input`
+- `yarn generate presenter show-card pages/ShowListPage`
+- `yarn generate view star-icon pages/ShowListPage/components`

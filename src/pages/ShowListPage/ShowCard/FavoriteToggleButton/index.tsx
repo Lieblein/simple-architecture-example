@@ -8,13 +8,13 @@ export default function FavoriteToggleButton(props: Readonly<IProps>) {
     const { className } = props;
     const {
         isFavorite,
-        click,
+        onClick,
     } = usePresenter(props);
 
     return (
         <button
             className={ classNames(className, styles.button) }
-            onClick={ click }
+            onClick={ onClick }
             type='button'
             title={ isFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }
         >
