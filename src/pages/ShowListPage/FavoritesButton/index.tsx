@@ -15,13 +15,16 @@ export default function FavoritesButton() {
         anchorElement,
     } = usePresenter();
 
+    if (favoriteCount === 0) {
+        return null;
+    }
+
     return (
         <>
             <Button
                 className={ styles.button }
                 onClick={ click }
                 ref={ buttonRef }
-                disabled={ favoriteCount === 0 }
             >
                 { favoriteCount }
                 <StarIcon

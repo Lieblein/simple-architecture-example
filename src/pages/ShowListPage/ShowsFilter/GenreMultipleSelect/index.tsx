@@ -1,11 +1,11 @@
 import classNames from '@utils/classNames';
 import { type IProps } from './types';
-import usePresenter from './usePresenter';
+import usePresenter from './logic/usePresenter';
 import styles from './genre-multiple-select.module.css';
 
 export default function GenreMultipleSelect(props: Readonly<IProps>) {
     const { className, value } = props;
-    const { options, toggleOption } = usePresenter(props);
+    const { options, onClick } = usePresenter(props);
 
     if (options.length === 0) {
         return null;
@@ -19,7 +19,7 @@ export default function GenreMultipleSelect(props: Readonly<IProps>) {
                         key={ option }
                         className={ classNames(styles.chip, { [styles.selected]: value.includes(option) }) }
                         type='button'
-                        onClick={ () => toggleOption(option) }
+                        onClick={ () => onClick(option) }
                     >
                         { option.toLocaleLowerCase() }
                     </button>

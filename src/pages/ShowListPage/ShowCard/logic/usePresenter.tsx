@@ -1,4 +1,4 @@
-import { calculateBorderRadius } from '@utils/borderRadius';
+import { calculateBorderRadius } from '@tasks/borderRadius';
 import { IProps } from '../types';
 
 const MIN = 20;

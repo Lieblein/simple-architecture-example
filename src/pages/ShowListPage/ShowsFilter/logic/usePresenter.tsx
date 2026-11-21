@@ -15,7 +15,13 @@ export default function usePresenter() {
             pagination,
         })),
     );
-    const reset = useShowListStore(({ reset }) => reset); // TODO: так нельзя
+    const onReset = () => {
+        searchShows({
+            query: '',
+            genres: [],
+            page: 1,
+        });
+    };
 
     const onChangeSearch = (search: string) => {
         searchShows({
@@ -37,6 +43,6 @@ export default function usePresenter() {
         filter,
         onChangeSearch,
         onChangeSelectedGenres,
-        reset,
+        onReset,
     };
 }

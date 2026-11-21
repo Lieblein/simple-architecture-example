@@ -19,8 +19,8 @@ interface IShowListState {
 interface IShowListActions {
     setShows: (shows: IShow[]) => void;
     setFilter: (filter: IShowListFilter) => void;
-    setPagination: (pagination: IPagination) => void;
     setPage: (page: number) => void;
+    setTotalPages: (totalPages: number) => void;
     setAvailableGenres: (genres: string[]) => void;
     setIsLoading: (isLoading: boolean) => void;
     reset: () => void;
@@ -50,9 +50,9 @@ const useShowListStore = create<IShowListStore>()(
 
         setFilter: (filter) => set({ filter }),
 
-        setPagination: (pagination) => set({ pagination }),
-
         setPage: (page) => set((state) => { state.pagination.activePage = page; }),
+
+        setTotalPages: (totalPages) => set((state) => { state.pagination.totalPages = totalPages; }),
 
         setAvailableGenres: (availableGenres) => set({ availableGenres }),
 

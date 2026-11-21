@@ -1,6 +1,6 @@
 import classNames from '@utils/classNames';
 import Button from '@components/Button';
-import DebouncedInput from '@components/DebouncedInput';
+import Input from '@components/Input';
 import usePresenter from './logic/usePresenter';
 import GenreMultipleSelect from './GenreMultipleSelect';
 import styles from './shows-filter.module.css';
@@ -14,22 +14,21 @@ export default function ShowsFilter({ className }: IProps) {
         filter,
         onChangeSearch,
         onChangeSelectedGenres,
-        reset,
+        onReset,
     } = usePresenter();
 
     return (
         <div className={ classNames(className, styles.root) }>
             <div className={ styles.filter }>
                 <div className={ styles.firstLine }>
-                    <DebouncedInput
+                    <Input
                         className={ styles.search }
                         name='search'
                         value={ filter.search }
                         onChange={ onChangeSearch }
-                        debounceTimeout={ 200 }
                         placeholder='поиск...'
                     />
-                    <Button onClick={ reset }>
+                    <Button onClick={ onReset }>
                         очистить фильтр
                     </Button>
                 </div>

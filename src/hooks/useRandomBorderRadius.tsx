@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import random from 'lodash/random';
-import { calculateBorderRadius } from '@utils/borderRadius';
+import { calculateBorderRadius } from '@tasks/borderRadius';
 
 // TODO: найти этому файлу нормальное место
 

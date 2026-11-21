@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import useFavoritesStore from '@store/favoritesStore';
 
+// TODO: тут надо всё переделать!
 export default function usePresenter() {
     const [popoverOpen, setPopoverOpen] = useState(false);
     const closePopover = () => setPopoverOpen(false);

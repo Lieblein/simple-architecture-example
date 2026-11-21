@@ -1,16 +1,26 @@
 import { type IShow } from '@api/show';
 import sendRequest from '@tasks/sendRequest';
-import addNotification from '../../../../tasks/addNotification';
+import addNotification from '@tasks/addNotification';
 import useShowListStore from '@store/showListStore';
 
 const ITEMS_PER_PAGE = 3;
+const DEBOUNCE_TIMEOUT = 200;
 
 let abortController: AbortController | null = null;
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
 const updateAbortController = () => {
     abortController?.abort();
     abortController = new AbortController();
 
     return abortController.signal;
+};
+
+const clearDebounceTimer = () => {
+    if (debounceTimer !== null) {
+        clearTimeout(debounceTimer);
+        debounceTimer = null;
+    }
 };
 
 interface ISearchShowsParams {
@@ -27,13 +37,37 @@ interface ISearchShowsResponse {
     genres: string[];
 }
 
-export default async function searchShows(params: ISearchShowsParams) {
+async function loadShows(
+    params: ISearchShowsParams,
+    abortControllerSignal: AbortSignal,
+) {
+    const { query, page, genres } = params;
+
+    const queryParams = new URLSearchParams({
+        q: query.trim(),
+        page: String(page),
+        size: String(ITEMS_PER_PAGE),
+    });
+
+    if (genres.length > 0) {
+        queryParams.set('genres', genres.join(','));
+    }
+
+    return await sendRequest<ISearchShowsResponse>(
+        'GET',
+        `/api/search/show?${queryParams.toString()}`,
+        undefined,
+        { abortControllerSignal },
+    );
+}
+
+export default function searchShows(params: ISearchShowsParams) {
     const { query, page, genres } = params;
 
     const {
         setShows,
         setFilter,
-        setPagination,
+        setTotalPages,
         setPage,
         setAvailableGenres,
         setIsLoading,
@@ -43,69 +77,40 @@ export default async function searchShows(params: ISearchShowsParams) {
     setFilter({ search: query, selectedGenres: genres });
     setPage(page);
 
-    try {
-        if (query.trim() === '') {
-            const response = {
-                shows: [],
-                pagination: {
-                    activePage: 1,
-                    totalPages: 0,
-                },
-                availableGenres: [],
-            };
+    clearDebounceTimer();
 
-            reset();
+    debounceTimer = setTimeout(
+        async () => {
+            try {
+                if (query.trim() === '') {
+                    reset();
 
-            return response;
-        }
+                    return;
+                }
 
-        setIsLoading(true);
+                setIsLoading(true);
 
-        const queryParams = new URLSearchParams({
-            q: query.trim(),
-            page: String(page),
-            size: String(ITEMS_PER_PAGE),
-        });
+                const abortControllerSignal = updateAbortController();
+                const {
+                    items,
+                    total,
+                    size,
+                    genres: availableGenres,
+                } = await loadShows(params, abortControllerSignal);
 
-        if (genres.length > 0) {
-            queryParams.set('genres', genres.join(','));
-        }
+                setShows(items);
+                setTotalPages(Math.ceil(total / size) || 1);
+                setAvailableGenres(availableGenres);
+            } catch (error) {
+                if (error instanceof Error && error.name === 'AbortError') {
+                    return null;
+                }
 
-        const abortControllerSignal = updateAbortController();
-        const {
-            items,
-            page: activePage,
-            total,
-            size,
-            genres: availableGenres,
-        } = await sendRequest<ISearchShowsResponse>(
-            'GET',
-            `/api/search/show?${queryParams.toString()}`,
-            undefined,
-            { abortControllerSignal },
-        );
-
-        const response = {
-            shows: items,
-            pagination: {
-                activePage,
-                totalPages: Math.ceil(total / size) || 1,
-            },
-            availableGenres,
-        };
-
-        setShows(items);
-        setPagination(response.pagination);
-        setAvailableGenres(availableGenres);
-
-        return response;
-    } catch (error) {
-        if (error instanceof Error && error.name === 'AbortError') {
-            return null;
-        }
-
-        addNotification('Ошибка загрузки данных', 'error');
-    } finally {
-        setIsLoading(false);
-    }
+                addNotification('Ошибка загрузки данных', 'error');
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        DEBOUNCE_TIMEOUT,
+    );
 }

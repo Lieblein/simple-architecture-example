@@ -1,5 +1,3 @@
-// TODO: найти этому файлу нормальное место. UI-логика - это же не таска?
-
 export function calculateBorderRadius(id: number, min: number, max: number): string {
     let h = id * 2654435761;
     h = (h ^ (h >>> 16)) >>> 0;
